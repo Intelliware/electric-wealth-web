@@ -10,7 +10,7 @@ The browser app for **Electric Wealth**, a Canadian retail wealth-management ser
 
 ## Getting started
 
-Prerequisite: **Node.js 22.13+**. Clone the three repos side by side, then:
+Prerequisite: **Node.js 24** (workshop standard: 24.19.0, see `.nvmrc`). Clone the three repos side by side, then:
 
 ```bash
 # Terminal 1: database + API
