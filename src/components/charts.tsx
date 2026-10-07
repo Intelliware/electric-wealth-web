@@ -85,3 +85,31 @@ export function PerformanceChart({
     </svg>
   );
 }
+
+/** Price line with a shaded area underneath. Values are plotted as-is (not rebased). */
+export function PriceChart({ series, label, up }: { series: { t: string; c: number }[]; label: string; up: boolean }) {
+  const width = 1000;
+  const height = 260;
+  const pad = 24;
+  if (series.length < 2) return null;
+  const values = series.map((p) => p.c);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const span = max - min || 1;
+  const x = (i: number) => pad + (i / (series.length - 1)) * (width - pad * 2);
+  const y = (v: number) => height - pad - ((v - min) / span) * (height - pad * 2);
+  const line = series.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.c).toFixed(1)}`).join(' ');
+  const area = `${line} L${x(series.length - 1).toFixed(1)},${height - pad} L${pad},${height - pad} Z`;
+  return (
+    <svg className={`price-chart ${up ? 'price-chart--up' : 'price-chart--down'}`} viewBox={`0 0 ${width} ${height}`} role="img" aria-label={label}>
+      <path d={area} className="price-chart__area" />
+      <path d={line} className="price-chart__line" />
+      <text x={pad} y={height - 4} className="perf-chart__axis">
+        {series[0].t}
+      </text>
+      <text x={width - pad} y={height - 4} textAnchor="end" className="perf-chart__axis">
+        {series[series.length - 1].t}
+      </text>
+    </svg>
+  );
+}

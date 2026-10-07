@@ -14,6 +14,9 @@ import { DocumentsPage } from './features/documents/DocumentsPage';
 import { GlossaryPage } from './features/education/GlossaryPage';
 import { LearnPage } from './features/education/LearnPage';
 import { GoalsPage } from './features/goals/GoalsPage';
+import { BasketsPage } from './features/market/BasketsPage';
+import { MarketPage } from './features/market/MarketPage';
+import { SecurityPage } from './features/market/SecurityPage';
 import { NotificationsPage } from './features/notifications/NotificationsPage';
 import { ProfilePage } from './features/profile/ProfilePage';
 import { SettingsPage } from './features/settings/SettingsPage';
@@ -60,6 +63,9 @@ export function App() {
         <Route path="goals" element={<GoalsPage />} />
         <Route path="learn" element={<LearnPage />} />
         <Route path="learn/glossary" element={<GlossaryPage />} />
+        <Route path="market" element={<MarketPage />} />
+        <Route path="market/baskets" element={<BasketsPage />} />
+        <Route path="market/:symbol" element={<SecurityPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />

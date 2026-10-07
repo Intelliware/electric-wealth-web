@@ -23,6 +23,10 @@ export const queryKeys = {
   availability: ['advisor', 'availability'] as const,
   appointments: ['advisor', 'appointments'] as const,
   advisorMessages: ['advisor', 'messages'] as const,
+  watchlist: ['market', 'watchlist'] as const,
+  security: (symbol: string) => ['market', 'security', symbol] as const,
+  history: (symbol: string, range: string) => ['market', 'history', symbol, range] as const,
+  marketSearch: (q: string) => ['market', 'search', q] as const,
 };
 
 export function useDashboard() {
@@ -280,4 +284,62 @@ export function useSendAdvisorMessage() {
     onSuccess: (message) =>
       qc.setQueryData<Schemas['AdvisorMessage'][]>(queryKeys.advisorMessages, (list) => [...(list ?? []), message]),
   });
+}
+
+export type HistoryRange = Schemas['HistoryRange'];
+
+export function useWatchlist() {
+  return useQuery({
+    queryKey: queryKeys.watchlist,
+    queryFn: async () => unwrap(await api.GET('/api/market/watchlist')),
+  });
+}
+
+export function useToggleWatchlist() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ symbol, watch }: { symbol: string; watch: boolean }) => {
+      const params = { params: { path: { symbol } } };
+      return unwrap(watch ? await api.PUT('/api/market/watchlist/{symbol}', params) : await api.DELETE('/api/market/watchlist/{symbol}', params));
+    },
+    onSuccess: (watchlist, { symbol }) => {
+      qc.setQueryData(queryKeys.watchlist, watchlist);
+      void qc.invalidateQueries({ queryKey: queryKeys.security(symbol) });
+    },
+  });
+}
+
+export function useSecurity(symbol: string) {
+  return useQuery({
+    queryKey: queryKeys.security(symbol),
+    queryFn: async () => unwrap(await api.GET('/api/market/securities/{symbol}', { params: { path: { symbol } } })),
+  });
+}
+
+export function usePriceHistory(symbol: string, range: HistoryRange) {
+  return useQuery({
+    queryKey: queryKeys.history(symbol, range),
+    queryFn: async () => unwrap(await api.GET('/api/market/history', { params: { query: { symbol, range } } })),
+    placeholderData: keepPreviousData,
+  });
+}
+
+export function useMarketSearch(q: string) {
+  return useQuery({
+    queryKey: queryKeys.marketSearch(q),
+    queryFn: async () => unwrap(await api.GET('/api/market/search', { params: { query: { q } } })),
+    enabled: q.length >= 2,
+  });
+}
+
+export function useMarketNews() {
+  return useQuery({ queryKey: ['market', 'news'], queryFn: async () => unwrap(await api.GET('/api/market/news')) });
+}
+
+export function useMarketRoundup() {
+  return useQuery({ queryKey: ['market', 'roundup'], queryFn: async () => unwrap(await api.GET('/api/market/roundup')) });
+}
+
+export function useBaskets() {
+  return useQuery({ queryKey: ['market', 'baskets'], queryFn: async () => unwrap(await api.GET('/api/market/baskets')) });
 }

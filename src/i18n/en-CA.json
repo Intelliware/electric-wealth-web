@@ -458,6 +458,22 @@
     "meeting_notes_placeholder": "e.g. Year-end tax planning",
     "slot_taken": "That time was just taken. Please choose another.",
     "reschedule_to": "Move to {{time}}",
-    "you": "You"
+    "you": "You",
+    "nav_market": "Market",
+    "watchlist_hint": "Search for a security and add it to your watchlist.",
+    "security": "Security",
+    "price": "Price",
+    "today": "Today",
+    "today_lower": "today",
+    "remove": "Remove",
+    "remove_from_watchlist": "Remove from watchlist",
+    "remove_from_watchlist_named": "Remove {{symbol}} from watchlist",
+    "no_search_results": "No securities match “{{q}}”.",
+    "price_history": "Price history",
+    "chart_range": "Chart range",
+    "range_change": "{{range}} change",
+    "range_high": "High",
+    "range_low": "Low",
+    "holdings": "Holdings"
   }
 }

@@ -458,6 +458,22 @@
     "meeting_notes_placeholder": "p. ex. Planification fiscale de fin d’année",
     "slot_taken": "Cette plage vient d’être réservée. Veuillez en choisir une autre.",
     "reschedule_to": "Déplacer à {{time}}",
-    "you": "Vous"
+    "you": "Vous",
+    "nav_market": "Marchés",
+    "watchlist_hint": "Recherchez un titre et ajoutez-le à votre liste de suivi.",
+    "security": "Titre",
+    "price": "Cours",
+    "today": "Aujourd’hui",
+    "today_lower": "aujourd’hui",
+    "remove": "Retirer",
+    "remove_from_watchlist": "Retirer de la liste de suivi",
+    "remove_from_watchlist_named": "Retirer {{symbol}} de la liste de suivi",
+    "no_search_results": "Aucun titre ne correspond à « {{q}} ».",
+    "price_history": "Historique des cours",
+    "chart_range": "Période du graphique",
+    "range_change": "Variation sur {{range}}",
+    "range_high": "Haut",
+    "range_low": "Bas",
+    "holdings": "Placements"
   }
 }

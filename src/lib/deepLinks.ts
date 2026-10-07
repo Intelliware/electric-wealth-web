@@ -17,6 +17,9 @@ export function deepLinkToRoute(deepLink: string | undefined): string | undefine
       return `/accounts/${encodeURIComponent(id)}`;
     case 'advisor':
       return id === 'messages' ? '/advisor/messages' : '/advisor';
+    case 'market':
+      if (id === 'baskets') return '/market/baskets';
+      return id ? `/market/${encodeURIComponent(id)}` : '/market';
     case 'learn':
       return id === 'glossary' ? '/learn/glossary' : '/learn';
     case 'notifications':
@@ -26,6 +29,6 @@ export function deepLinkToRoute(deepLink: string | undefined): string | undefine
     case 'settings':
       return '/settings';
     default:
-      return undefined; // market: not on web yet
+      return undefined;
   }
 }

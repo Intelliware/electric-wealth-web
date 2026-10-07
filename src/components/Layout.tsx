@@ -47,6 +47,7 @@ export function Layout() {
             <NavLink to="/accounts">{t('web.nav_accounts')}</NavLink>
             <NavLink to="/documents">{t('web.nav_documents')}</NavLink>
             <NavLink to="/goals">{t('web.nav_goals')}</NavLink>
+            <NavLink to="/market">{t('web.nav_market')}</NavLink>
             <NavLink to="/learn">{t('web.nav_learn')}</NavLink>
             <NavLink to="/advisor">{t('web.nav_advisor')}</NavLink>
           </nav>
