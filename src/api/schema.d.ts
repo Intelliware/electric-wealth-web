@@ -226,6 +226,106 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/wealth/goals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List savings goals */
+        get: {
+            parameters: {
+                query?: {
+                    page?: number;
+                    pageSize?: number;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Goals */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GoalsListResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Create a savings goal */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["GoalCreateRequest"];
+                };
+            };
+            responses: {
+                /** @description Created goal */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Goal"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/notifications": {
         parameters: {
             query?: never;
@@ -1169,6 +1269,59 @@ export interface components {
         };
         LogoutRequest: {
             refreshToken?: string;
+        };
+        GoalsListResponse: {
+            items: components["schemas"]["Goal"][];
+            page: number;
+            pageSize: number;
+            total: number;
+        };
+        Goal: {
+            /** @example goal-1 */
+            id: string;
+            name: string;
+            category: components["schemas"]["GoalCategory"];
+            /**
+             * @description Amount in minor units (cents)
+             * @example 3241000
+             */
+            currentAmount: number;
+            /**
+             * @description Amount in minor units (cents)
+             * @example 3241000
+             */
+            targetAmount: number;
+            currency: string;
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            targetDate: string;
+            /** @description currentAmount / targetAmount, as a percentage (0-100) */
+            progressPct: number;
+        };
+        /** @enum {string} */
+        GoalCategory: "Education" | "Vacation" | "Home" | "Retirement" | "Safety";
+        GoalCreateRequest: {
+            name: string;
+            category: components["schemas"]["GoalCategory"];
+            /**
+             * @description Amount in minor units (cents)
+             * @example 3241000
+             */
+            targetAmount: number;
+            /**
+             * @description Defaults to 0
+             * @example 3241000
+             */
+            currentAmount?: number;
+            /** @enum {string} */
+            currency: "CAD";
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            targetDate: string;
         };
         NotificationsResponse: components["schemas"]["Notification"][];
         Notification: {

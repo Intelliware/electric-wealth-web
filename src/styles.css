@@ -1101,3 +1101,35 @@ a.quick-link:hover {
   align-items: center;
   margin-top: 6px;
 }
+
+/* Goals */
+.goal-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 800px) {
+  .goal-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.goal-grid .card {
+  height: 100%;
+}
+.goal-card__amounts {
+  margin: 10px 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+.goal-card__footer {
+  margin-top: 12px;
+}
+.goal-form {
+  margin-bottom: 16px;
+}
+@media (min-width: 560px) {
+  .form__row--2 {
+    grid-template-columns: 2fr 1fr;
+  }
+}

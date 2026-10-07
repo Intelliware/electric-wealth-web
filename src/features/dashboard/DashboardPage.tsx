@@ -65,7 +65,15 @@ export function DashboardPage() {
         </Card>
 
         <Card>
-          <SectionTitle>{t('dashboard.goals')}</SectionTitle>
+          <SectionTitle
+            action={
+              <Link to="/goals" className="small">
+                {t('common.view_all')}
+              </Link>
+            }
+          >
+            {t('dashboard.goals')}
+          </SectionTitle>
           <ul className="list">
             {data.goals.map((goal) => (
               <li key={goal.id} className="goal">

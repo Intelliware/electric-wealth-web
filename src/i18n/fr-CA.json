@@ -407,6 +407,8 @@
     "unread_count_one": "{{count}} non lue",
     "unread_count_other": "{{count}} non lues",
     "notifications_unread_one": "Notifications, {{count}} non lue",
-    "notifications_unread_other": "Notifications, {{count}} non lues"
+    "notifications_unread_other": "Notifications, {{count}} non lues",
+    "nav_goals": "Objectifs",
+    "goal_invalid": "Veuillez vérifier l’objectif. La date cible doit être dans le futur et le montant actuel ne peut pas dépasser la cible."
   }
 }

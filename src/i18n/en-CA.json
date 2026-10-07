@@ -407,6 +407,8 @@
     "unread_count_one": "{{count}} unread",
     "unread_count_other": "{{count}} unread",
     "notifications_unread_one": "Notifications, {{count}} unread",
-    "notifications_unread_other": "Notifications, {{count}} unread"
+    "notifications_unread_other": "Notifications, {{count}} unread",
+    "nav_goals": "Goals",
+    "goal_invalid": "Please check the goal. The target date must be in the future and the current amount cannot exceed the target."
   }
 }

@@ -17,6 +17,7 @@ export const queryKeys = {
   performance: (id: string, range: PerformanceRange) => ['performance', id, range] as const,
   documents: (filters: { year?: number; category?: string }) => ['documents', filters] as const,
   notifications: ['notifications'] as const,
+  goals: ['goals'] as const,
 };
 
 export function useDashboard() {
@@ -160,5 +161,20 @@ export function useMarkAllNotificationsRead() {
       qc.setQueryData<Schemas['Notification'][]>(queryKeys.notifications, (list) =>
         list?.map((n) => ({ ...n, read: true })),
       ),
+  });
+}
+
+export function useGoals() {
+  return useQuery({
+    queryKey: queryKeys.goals,
+    queryFn: async () => unwrap(await api.GET('/api/wealth/goals', { params: { query: { pageSize: 100 } } })),
+  });
+}
+
+export function useCreateGoal() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (body: Schemas['GoalCreateRequest']) => unwrap(await api.POST('/api/wealth/goals', { body })),
+    onSuccess: () => void qc.invalidateQueries({ queryKey: queryKeys.goals }),
   });
 }
