@@ -403,6 +403,10 @@
     "all_accounts": "All accounts",
     "size": "Size",
     "year": "Year",
-    "user_menu": "Account menu"
+    "user_menu": "Account menu",
+    "unread_count_one": "{{count}} unread",
+    "unread_count_other": "{{count}} unread",
+    "notifications_unread_one": "Notifications, {{count}} unread",
+    "notifications_unread_other": "Notifications, {{count}} unread"
   }
 }

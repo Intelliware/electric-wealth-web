@@ -14,6 +14,8 @@ export function deepLinkToRoute(deepLink: string | undefined): string | undefine
     case 'accounts':
       if (!id || id === 'new') return '/accounts';
       return `/accounts/${encodeURIComponent(id)}`;
+    case 'notifications':
+      return '/notifications';
     case 'profile':
       return '/profile';
     case 'settings':

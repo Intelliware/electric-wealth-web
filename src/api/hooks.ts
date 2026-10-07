@@ -16,6 +16,7 @@ export const queryKeys = {
   transactions: (id: string, page: number, type?: TransactionType) => ['transactions', id, page, type ?? 'all'] as const,
   performance: (id: string, range: PerformanceRange) => ['performance', id, range] as const,
   documents: (filters: { year?: number; category?: string }) => ['documents', filters] as const,
+  notifications: ['notifications'] as const,
 };
 
 export function useDashboard() {
@@ -128,5 +129,36 @@ export function useDocuments(filters: { year?: number; category?: string }) {
     queryFn: async () =>
       unwrap(await api.GET('/api/wealth/documents', { params: { query: { ...filters, pageSize: 100 } } })),
     placeholderData: keepPreviousData,
+  });
+}
+
+export function useNotifications() {
+  return useQuery({
+    queryKey: queryKeys.notifications,
+    queryFn: async () => unwrap(await api.GET('/api/notifications')),
+    refetchInterval: 60_000, // keeps the unread badge in the top bar current
+  });
+}
+
+export function useMarkNotificationRead() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) =>
+      unwrap(await api.POST('/api/notifications/{id}/read', { params: { path: { id } } })),
+    onSuccess: ({ id }) =>
+      qc.setQueryData<Schemas['Notification'][]>(queryKeys.notifications, (list) =>
+        list?.map((n) => (n.id === id ? { ...n, read: true } : n)),
+      ),
+  });
+}
+
+export function useMarkAllNotificationsRead() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async () => unwrap(await api.POST('/api/notifications/read-all')),
+    onSuccess: () =>
+      qc.setQueryData<Schemas['Notification'][]>(queryKeys.notifications, (list) =>
+        list?.map((n) => ({ ...n, read: true })),
+      ),
   });
 }

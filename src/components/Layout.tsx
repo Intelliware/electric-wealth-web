@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, useLocation } from 'react-router';
-import { usePreferences, useProfile, useUpdatePreferences } from '../api/hooks';
+import { useNotifications, usePreferences, useProfile, useUpdatePreferences } from '../api/hooks';
 import { useAuth } from '../auth/AuthContext';
 import { getAppLocale, setAppLocale } from '../i18n';
 import { initials } from '../lib/format';
@@ -48,6 +48,7 @@ export function Layout() {
             <NavLink to="/documents">{t('web.nav_documents')}</NavLink>
           </nav>
           <div className="topbar__actions">
+            <NotificationBell />
             <button type="button" className="btn btn--ghost btn--sm" onClick={toggleLanguage} aria-label={t('web.language_toggle_label')}>
               {t('web.language_toggle')}
             </button>
@@ -59,6 +60,23 @@ export function Layout() {
         <Outlet />
       </main>
     </div>
+  );
+}
+
+/** Bell icon linking to the notification centre, with the unread count. */
+function NotificationBell() {
+  const { t } = useTranslation();
+  const { data } = useNotifications();
+  const unread = data?.filter((n) => !n.read).length ?? 0;
+  const label = unread ? t('web.notifications_unread', { count: unread }) : t('notifications.title');
+  return (
+    <NavLink to="/notifications" className="icon-btn" aria-label={label} title={label}>
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+      </svg>
+      {unread ? <span className="icon-btn__badge" aria-hidden="true">{unread > 9 ? '9+' : unread}</span> : null}
+    </NavLink>
   );
 }
 

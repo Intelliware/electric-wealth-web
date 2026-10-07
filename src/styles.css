@@ -1021,3 +1021,83 @@ a.quick-link:hover {
 .user-menu__panel a.active {
   background: var(--bg-sunken);
 }
+
+/* Notifications */
+.icon-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--text);
+}
+.icon-btn:hover,
+.icon-btn.active {
+  background: var(--bg-sunken);
+}
+.icon-btn__badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-pill);
+  background: var(--error-text);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.notification {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.notification:first-child {
+  padding-top: 0;
+}
+.notification:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.notification__main {
+  flex: 1;
+  min-width: 0;
+}
+.notification__title {
+  font-weight: 500;
+}
+.notification.is-unread .notification__title {
+  font-weight: 700;
+}
+.notification__dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+.notification.is-unread .notification__dot--warning {
+  background: var(--warning-text);
+}
+.notification.is-unread .notification__dot--success {
+  background: var(--success-text);
+}
+.notification.is-unread .notification__dot--info {
+  background: var(--info-text);
+}
+.notification .tags {
+  align-items: center;
+  margin-top: 6px;
+}

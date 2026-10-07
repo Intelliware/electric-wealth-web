@@ -8,6 +8,7 @@ import { AccountsPage } from './features/accounts/AccountsPage';
 import { LoginPage, MfaPage } from './features/auth/AuthPages';
 import { DashboardPage } from './features/dashboard/DashboardPage';
 import { DocumentsPage } from './features/documents/DocumentsPage';
+import { NotificationsPage } from './features/notifications/NotificationsPage';
 import { ProfilePage } from './features/profile/ProfilePage';
 import { SettingsPage } from './features/settings/SettingsPage';
 
@@ -47,6 +48,7 @@ export function App() {
         <Route path="accounts" element={<AccountsPage />} />
         <Route path="accounts/:id" element={<AccountDetailPage />} />
         <Route path="documents" element={<DocumentsPage />} />
+        <Route path="notifications" element={<NotificationsPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
         <Route path="*" element={<NotFound />} />

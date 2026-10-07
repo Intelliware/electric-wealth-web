@@ -403,6 +403,10 @@
     "all_accounts": "Tous les comptes",
     "size": "Taille",
     "year": "Année",
-    "user_menu": "Menu du compte"
+    "user_menu": "Menu du compte",
+    "unread_count_one": "{{count}} non lue",
+    "unread_count_other": "{{count}} non lues",
+    "notifications_unread_one": "Notifications, {{count}} non lue",
+    "notifications_unread_other": "Notifications, {{count}} non lues"
   }
 }
