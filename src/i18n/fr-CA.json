@@ -474,6 +474,29 @@
     "range_change": "Variation sur {{range}}",
     "range_high": "Haut",
     "range_low": "Bas",
-    "holdings": "Placements"
+    "holdings": "Placements",
+    "no_online_access": "Déjà client, mais nouveau en ligne?",
+    "have_online_access": "Vous avez déjà un accès en ligne?",
+    "password_rule": "Au moins 8 caractères, avec une lettre et un chiffre.",
+    "confirm_password": "Confirmer le mot de passe",
+    "passwords_differ": "Les mots de passe ne correspondent pas.",
+    "account_number_rule": "Le numéro à 10 chiffres figurant sur vos relevés",
+    "register_demo_hint": "Démo : compte 7391046285, code postal K1P 5G4, né(e) le 1990-02-17 (Priya Patel). Ou 2654819370, H2X 1Y4, 1985-09-03 (Marc Tremblay).",
+    "identity_confirmed": "Merci, {{name}}. Nous avons trouvé votre dossier client.",
+    "question_n": "Question {{n}}",
+    "answer_n": "Réponse {{n}}",
+    "answer_placeholder": "Votre réponse",
+    "mfa_sms_description": "Nous enverrons un code par texto au numéro au dossier.",
+    "mfa_email_description": "Nous enverrons un code par courriel à l’adresse choisie.",
+    "create_login": "Créer mon accès",
+    "register_errors": {
+      "EMAIL_TAKEN": "Ce courriel a déjà un accès en ligne. Connectez-vous plutôt.",
+      "IDENTITY_MISMATCH": "Nous n’avons pas pu vérifier ces renseignements. Comparez-les à votre dernier relevé et réessayez.",
+      "ALREADY_ENROLLED": "Ce client a déjà un accès en ligne. Connectez-vous plutôt.",
+      "REGISTRATION_NOT_FOUND": "Votre inscription a expiré. Veuillez recommencer.",
+      "STEP_OUT_OF_ORDER": "Veuillez d’abord terminer les étapes précédentes.",
+      "VALIDATION_ERROR": "Veuillez vérifier les renseignements indiqués."
+    },
+    "no_investments": "Aucun placement pour l’instant. Votre répartition s’affichera ici une fois vos comptes approvisionnés."
   }
 }

@@ -1763,6 +1763,377 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/registration/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Step 1: choose a login (email and password)
+         * @description Starts online enrolment for an existing client. 409 EMAIL_TAKEN if the email already has online access.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["RegistrationStartRequest"];
+                };
+            };
+            responses: {
+                /** @description Step 1: choose a login (email and password) */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["RegistrationStartResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Conflicts with the current state (e.g. the slot was just taken) */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/registration/verify-identity": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Step 2: match the account number, postal code and date of birth on file
+         * @description 422 IDENTITY_MISMATCH if no client record matches all three; 409 ALREADY_ENROLLED if that client already has online access.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["VerifyIdentityRequest"];
+                };
+            };
+            responses: {
+                /** @description Step 2: match the account number, postal code and date of birth on file */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["VerifyIdentityResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Conflicts with the current state (e.g. the slot was just taken) */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description The details did not match our records */
+                422: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/registration/security-questions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Questions to choose from in step 3 */
+        get: {
+            parameters: {
+                query?: never;
+                header?: {
+                    "accept-language"?: components["schemas"]["Language"];
+                };
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Security questions */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["SecurityQuestionsResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Step 3: answer two security questions */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["SecurityAnswersRequest"];
+                };
+            };
+            responses: {
+                /** @description Step 3: answer two security questions */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StepSavedResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Conflicts with the current state (e.g. the slot was just taken) */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/registration/trusted-contact": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Step 5 (optional): add a trusted contact */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["TrustedContactRequest"];
+                };
+            };
+            responses: {
+                /** @description Step 5 (optional): add a trusted contact */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["StepSavedResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Conflicts with the current state (e.g. the slot was just taken) */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/registration/complete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Final step: choose the code method, accept the terms and create the login
+         * @description Creates the user and returns a signed-in session (mfaRequired is false: the client just proved their identity).
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["RegistrationCompleteRequest"];
+                };
+            };
+            responses: {
+                /** @description Final step: choose the code method, accept the terms and create the login */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["TokenResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Conflicts with the current state (e.g. the slot was just taken) */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/wealth/dashboard": {
         parameters: {
             query?: never;
@@ -2767,6 +3138,80 @@ export interface components {
             language?: components["schemas"]["Language"];
             theme?: components["schemas"]["Theme"];
             defaultMeetingType?: components["schemas"]["MeetingType"];
+        };
+        RegistrationStartResponse: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            /**
+             * Format: date-time
+             * @description Finish every step before this time (30 minutes)
+             */
+            expiresAt: string;
+        };
+        RegistrationStartRequest: {
+            /** Format: email */
+            email: string;
+            password: string;
+        };
+        VerifyIdentityResponse: {
+            /** @enum {boolean} */
+            verified: true;
+            /** @description The client name on file, to confirm the right record was found */
+            name: string;
+        };
+        VerifyIdentityRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            accountNumber: string;
+            postalCode: string;
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            dateOfBirth: string;
+        };
+        SecurityQuestionsResponse: components["schemas"]["SecurityQuestion"][];
+        SecurityQuestion: {
+            id: string;
+            text: string;
+        };
+        StepSavedResponse: {
+            /** @enum {boolean} */
+            saved: true;
+        };
+        SecurityAnswersRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            answers: {
+                questionId: string;
+                answer: string;
+            }[];
+        };
+        TrustedContactRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            name: string;
+            relationship: string;
+            phone?: string;
+            /** Format: email */
+            email?: string;
+        };
+        RegistrationCompleteRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            /**
+             * @description Where one-time sign-in codes are sent
+             * @enum {string}
+             */
+            mfaMethod: "sms" | "email";
+            consents: {
+                /** @enum {boolean} */
+                terms: true;
+                /** @enum {boolean} */
+                privacy: true;
+                /** @enum {boolean} */
+                electronicDelivery: true;
+            };
         };
         DashboardResponse: {
             portfolio: components["schemas"]["PortfolioSummary"];

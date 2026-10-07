@@ -1,10 +1,11 @@
 import { useState, type FormEvent, type ReactNode } from 'react';
+import { Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { ApiError } from '../../api/client';
 import { useAuth } from '../../auth/AuthContext';
 import { getAppLocale, setAppLocale } from '../../i18n';
 
-function AuthCard({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
+export function AuthCard({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {
   const { t } = useTranslation();
   const toggleLanguage = () => void setAppLocale(getAppLocale() === 'en-CA' ? 'fr-CA' : 'en-CA');
   return (
@@ -80,6 +81,9 @@ export function LoginPage() {
         </button>
         <p className="muted small">{t('web.demo_hint')}</p>
       </form>
+      <p className="auth__switch">
+        {t('web.no_online_access')} <Link to="/register">{t('auth.create_account')}</Link>
+      </p>
     </AuthCard>
   );
 }

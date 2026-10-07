@@ -9,6 +9,7 @@ import { AccountOpenPage } from './features/accounts/AccountOpenPage';
 import { AccountDetailPage } from './features/accounts/AccountDetailPage';
 import { AccountsPage } from './features/accounts/AccountsPage';
 import { LoginPage, MfaPage } from './features/auth/AuthPages';
+import { RegisterPage } from './features/auth/RegisterPage';
 import { DashboardPage } from './features/dashboard/DashboardPage';
 import { DocumentsPage } from './features/documents/DocumentsPage';
 import { GlossaryPage } from './features/education/GlossaryPage';
@@ -39,10 +40,11 @@ export function App() {
 
   // Until fully signed in, every URL shows the login or MFA step, then returns to where the user was going.
   if (phase !== 'authenticated') {
-    const returnTo = location.pathname === '/login' ? '/' : location.pathname + location.search;
+    const returnTo = ['/login', '/register'].includes(location.pathname) ? '/' : location.pathname + location.search;
     return (
       <Routes>
         <Route path="/login" element={phase === 'mfa' ? <MfaPage /> : <LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<Navigate to="/login" replace state={{ returnTo }} />} />
       </Routes>
     );

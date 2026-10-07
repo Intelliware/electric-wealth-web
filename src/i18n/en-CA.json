@@ -474,6 +474,29 @@
     "range_change": "{{range}} change",
     "range_high": "High",
     "range_low": "Low",
-    "holdings": "Holdings"
+    "holdings": "Holdings",
+    "no_online_access": "Already a client but new to online access?",
+    "have_online_access": "Already have online access?",
+    "password_rule": "At least 8 characters, with a letter and a number.",
+    "confirm_password": "Confirm password",
+    "passwords_differ": "The passwords don’t match.",
+    "account_number_rule": "The 10-digit number on your statements",
+    "register_demo_hint": "Demo: account 7391046285, postal code K1P 5G4, born 1990-02-17 (Priya Patel). Or 2654819370, H2X 1Y4, 1985-09-03 (Marc Tremblay).",
+    "identity_confirmed": "Thanks, {{name}}. We found your client record.",
+    "question_n": "Question {{n}}",
+    "answer_n": "Answer {{n}}",
+    "answer_placeholder": "Your answer",
+    "mfa_sms_description": "We’ll text a code to the phone number on file.",
+    "mfa_email_description": "We’ll email a code to the address you chose.",
+    "create_login": "Create my login",
+    "register_errors": {
+      "EMAIL_TAKEN": "This email already has online access. Sign in instead.",
+      "IDENTITY_MISMATCH": "We couldn’t verify those details. Check them against your latest statement and try again.",
+      "ALREADY_ENROLLED": "This client already has online access. Sign in instead.",
+      "REGISTRATION_NOT_FOUND": "Your registration timed out. Please start again.",
+      "STEP_OUT_OF_ORDER": "Please complete the previous steps first.",
+      "VALIDATION_ERROR": "Please check the highlighted details."
+    },
+    "no_investments": "No investments yet. Once your accounts are funded, your mix of assets appears here."
   }
 }

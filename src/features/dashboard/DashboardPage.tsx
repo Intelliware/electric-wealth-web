@@ -61,7 +61,11 @@ export function DashboardPage() {
       <div className="grid grid--2">
         <Card>
           <Eyebrow>{t('dashboard.asset_allocation')}</Eyebrow>
-          <AllocationBar segments={data.allocation} totalMinor={data.portfolio.totalValue} currency={data.portfolio.currency} />
+          {data.allocation.length ? (
+            <AllocationBar segments={data.allocation} totalMinor={data.portfolio.totalValue} currency={data.portfolio.currency} />
+          ) : (
+            <p className="muted">{t('web.no_investments')}</p>
+          )}
         </Card>
 
         <Card>
@@ -74,6 +78,7 @@ export function DashboardPage() {
           >
             {t('dashboard.goals')}
           </SectionTitle>
+          {data.goals.length === 0 ? <p className="muted">{t('goals.empty_body')}</p> : null}
           <ul className="list">
             {data.goals.map((goal) => (
               <li key={goal.id} className="goal">
@@ -88,7 +93,7 @@ export function DashboardPage() {
         </Card>
       </div>
 
-      <SectionTitle>{t('dashboard.quick_links')}</SectionTitle>
+      {data.quickLinks.length ? <SectionTitle>{t('dashboard.quick_links')}</SectionTitle> : null}
       <ul className="quick-links">
         {data.quickLinks.map((link) => {
           const to = deepLinkToRoute(link.deepLink);

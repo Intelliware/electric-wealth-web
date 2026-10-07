@@ -13,6 +13,8 @@ interface AuthContextValue {
   signOutReason: SignOutReason | null;
   login: (email: string, password: string) => Promise<void>;
   verifyMfa: (code: string) => Promise<void>;
+  /** Signs in with a session that needs no MFA step, e.g. the one returned at the end of registration. */
+  startSession: (tokens: { accessToken: string; refreshToken: string }) => void;
   logout: (reason?: SignOutReason) => void;
 }
 
@@ -73,6 +75,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setPhase('authenticated');
   }, []);
 
+  const startSession = useCallback((tokens: { accessToken: string; refreshToken: string }) => {
+    tokenStore.set({ ...tokens, mfaVerified: true });
+    setSignOutReason(null);
+    setPhase('authenticated');
+  }, []);
+
   // Any 401 from a protected endpoint means the session is gone.
   useEffect(() => {
     const onUnauthorized = () => {
@@ -109,8 +117,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [phase, logout]);
 
   const value = useMemo(
-    () => ({ phase, signOutReason, login, verifyMfa, logout }),
-    [phase, signOutReason, login, verifyMfa, logout],
+    () => ({ phase, signOutReason, login, verifyMfa, startSession, logout }),
+    [phase, signOutReason, login, verifyMfa, startSession, logout],
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
