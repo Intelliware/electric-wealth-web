@@ -437,6 +437,11 @@
         "name": "Non-registered",
         "description": "A flexible investment account with no contribution limits."
       }
-    }
+    },
+    "nav_learn": "Learn",
+    "lessons_completed": "{{done}} of {{total}} completed",
+    "level": "Level",
+    "completed": "Completed",
+    "mark_complete": "Mark complete"
   }
 }

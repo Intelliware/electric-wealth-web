@@ -18,6 +18,8 @@ export const queryKeys = {
   documents: (filters: { year?: number; category?: string }) => ['documents', filters] as const,
   notifications: ['notifications'] as const,
   goals: ['goals'] as const,
+  education: (locale: string, level?: string) => ['education', locale, level ?? 'all'] as const,
+  glossary: (locale: string, q: string) => ['glossary', locale, q] as const,
 };
 
 export function useDashboard() {
@@ -194,5 +196,34 @@ export function useCreateGoal() {
   return useMutation({
     mutationFn: async (body: Schemas['GoalCreateRequest']) => unwrap(await api.POST('/api/wealth/goals', { body })),
     onSuccess: () => void qc.invalidateQueries({ queryKey: queryKeys.goals }),
+  });
+}
+
+export type EducationLevel = Schemas['EducationLevel'];
+
+export function useEducationContent(level?: EducationLevel) {
+  const { i18n } = useTranslation();
+  return useQuery({
+    queryKey: queryKeys.education(i18n.language, level),
+    queryFn: async () => unwrap(await api.GET('/api/education/content', { params: { query: { level } } })),
+    placeholderData: keepPreviousData,
+  });
+}
+
+export function useSaveEducationProgress() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (body: Schemas['EducationProgressRequest']) =>
+      unwrap(await api.POST('/api/education/progress', { body })),
+    onSuccess: () => void qc.invalidateQueries({ queryKey: ['education'] }),
+  });
+}
+
+export function useGlossary(q: string) {
+  const { i18n } = useTranslation();
+  return useQuery({
+    queryKey: queryKeys.glossary(i18n.language, q),
+    queryFn: async () => unwrap(await api.GET('/api/education/glossary', { params: { query: { q: q || undefined } } })),
+    placeholderData: keepPreviousData,
   });
 }

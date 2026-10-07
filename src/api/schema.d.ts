@@ -226,6 +226,192 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/education/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learning centre catalogue with the user’s progress */
+        get: {
+            parameters: {
+                query?: {
+                    level?: components["schemas"]["EducationLevel"];
+                    type?: components["schemas"]["EducationType"];
+                };
+                header?: {
+                    "accept-language"?: components["schemas"]["Language"];
+                };
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Classes and challenges */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EducationContentResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/education/glossary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Financial glossary, A to Z, optionally filtered */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description Matches the term or definition, case-insensitive */
+                    q?: string;
+                };
+                header?: {
+                    "accept-language"?: components["schemas"]["Language"];
+                };
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Glossary entries */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["GlossaryResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/education/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Save progress on a class or challenge */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["EducationProgressRequest"];
+                };
+            };
+            responses: {
+                /** @description Saved progress */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["EducationProgressResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/wealth/goals": {
         parameters: {
             query?: never;
@@ -1383,6 +1569,36 @@ export interface components {
         LogoutRequest: {
             refreshToken?: string;
         };
+        EducationContentResponse: components["schemas"]["EducationContent"][];
+        EducationContent: {
+            /** @example e1 */
+            id: string;
+            /** @description In the language from Accept-Language */
+            title: string;
+            level: components["schemas"]["EducationLevel"];
+            type: components["schemas"]["EducationType"];
+            durationMin: number;
+            progressPct: number;
+        };
+        /** @enum {string} */
+        EducationLevel: "beginner" | "intermediate" | "advanced";
+        /** @enum {string} */
+        EducationType: "class" | "challenge";
+        /** @enum {string} */
+        Language: "en-CA" | "fr-CA";
+        GlossaryResponse: components["schemas"]["GlossaryEntry"][];
+        GlossaryEntry: {
+            term: string;
+            definition: string;
+        };
+        EducationProgressResponse: {
+            contentId: string;
+            progressPct: number;
+        };
+        EducationProgressRequest: {
+            contentId: string;
+            progressPct: number;
+        };
         GoalsListResponse: {
             items: components["schemas"]["Goal"][];
             page: number;
@@ -1509,8 +1725,6 @@ export interface components {
         };
         /** @enum {string} */
         DocumentDelivery: "digital" | "paper_and_digital";
-        /** @enum {string} */
-        Language: "en-CA" | "fr-CA";
         /** @enum {string} */
         Theme: "light" | "dark" | "system";
         /** @enum {string} */

@@ -437,6 +437,11 @@
         "name": "Non enregistré",
         "description": "Un compte de placement souple, sans plafond de cotisation."
       }
-    }
+    },
+    "nav_learn": "Apprendre",
+    "lessons_completed": "{{done}} sur {{total}} terminés",
+    "level": "Niveau",
+    "completed": "Terminé",
+    "mark_complete": "Marquer comme terminé"
   }
 }

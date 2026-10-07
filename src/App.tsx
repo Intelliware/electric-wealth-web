@@ -9,6 +9,8 @@ import { AccountsPage } from './features/accounts/AccountsPage';
 import { LoginPage, MfaPage } from './features/auth/AuthPages';
 import { DashboardPage } from './features/dashboard/DashboardPage';
 import { DocumentsPage } from './features/documents/DocumentsPage';
+import { GlossaryPage } from './features/education/GlossaryPage';
+import { LearnPage } from './features/education/LearnPage';
 import { GoalsPage } from './features/goals/GoalsPage';
 import { NotificationsPage } from './features/notifications/NotificationsPage';
 import { ProfilePage } from './features/profile/ProfilePage';
@@ -52,6 +54,8 @@ export function App() {
         <Route path="accounts/:id" element={<AccountDetailPage />} />
         <Route path="documents" element={<DocumentsPage />} />
         <Route path="goals" element={<GoalsPage />} />
+        <Route path="learn" element={<LearnPage />} />
+        <Route path="learn/glossary" element={<GlossaryPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
