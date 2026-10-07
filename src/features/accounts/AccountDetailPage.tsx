@@ -178,6 +178,8 @@ function PerformanceSection({ id }: { id: string }) {
           <Loading />
         ) : perf.error || !perf.data ? (
           <ErrorState error={perf.error} onRetry={() => void perf.refetch()} />
+        ) : perf.data.series.length === 0 ? (
+          <EmptyState title={t('web.no_performance_title')} body={t('web.no_performance_body')} />
         ) : (
           <>
             <div className="row">

@@ -184,7 +184,7 @@
     "empty_body": "Your statements and tax slips will appear here.",
     "share_title": "Share document",
     "share_recipient": "Recipient email",
-    "share_confirm": "Create secure link (24h)",
+    "share_confirm": "Send secure link (7 days)",
     "share_success": "Secure link created and sent",
     "action_required": "Action required"
   },
@@ -409,6 +409,34 @@
     "notifications_unread_one": "Notifications, {{count}} unread",
     "notifications_unread_other": "Notifications, {{count}} unread",
     "nav_goals": "Goals",
-    "goal_invalid": "Please check the goal. The target date must be in the future and the current amount cannot exceed the target."
+    "goal_invalid": "Please check the goal. The target date must be in the future and the current amount cannot exceed the target.",
+    "actions": "Actions",
+    "share_expires": "Link expires: {{time}}",
+    "account_type": "Account type",
+    "account_name": "Account name",
+    "default_account_name": "{{type}} account",
+    "open_account_confirm": "Open account",
+    "view_account": "Go to {{name}}",
+    "back_to_accounts": "Back to accounts",
+    "no_performance_title": "No performance history yet",
+    "no_performance_body": "Performance appears after the account has been funded for a full month.",
+    "account_types": {
+      "TFSA": {
+        "name": "TFSA",
+        "description": "Tax-Free Savings Account. Growth and withdrawals are tax-free."
+      },
+      "RRSP": {
+        "name": "RRSP",
+        "description": "Registered Retirement Savings Plan. Contributions reduce your taxable income."
+      },
+      "FHSA": {
+        "name": "FHSA",
+        "description": "First Home Savings Account. Save tax-free for your first home."
+      },
+      "NON_REGISTERED": {
+        "name": "Non-registered",
+        "description": "A flexible investment account with no contribution limits."
+      }
+    }
   }
 }

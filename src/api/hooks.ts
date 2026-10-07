@@ -103,6 +103,24 @@ export function useUpdateAccount(id: string) {
   });
 }
 
+export function useOpenAccount() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (body: Schemas['AccountOpenRequest']) => unwrap(await api.POST('/api/wealth/accounts', { body })),
+    onSuccess: () => {
+      void qc.invalidateQueries({ queryKey: ['accounts'] });
+      void qc.invalidateQueries({ queryKey: ['dashboard'] });
+    },
+  });
+}
+
+export function useShareDocument() {
+  return useMutation({
+    mutationFn: async ({ id, recipient }: { id: string; recipient: string }) =>
+      unwrap(await api.POST('/api/wealth/documents/{id}/share', { params: { path: { id } }, body: { recipient } })),
+  });
+}
+
 export function useTransactions(id: string, page: number, type?: TransactionType) {
   return useQuery({
     queryKey: queryKeys.transactions(id, page, type),

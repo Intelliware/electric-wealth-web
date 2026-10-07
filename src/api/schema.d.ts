@@ -806,7 +806,50 @@ export interface paths {
             };
         };
         put?: never;
-        post?: never;
+        /** Open a new, empty account */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["AccountOpenRequest"];
+                };
+            };
+            responses: {
+                /** @description Opened account */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["AccountSummary"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
         delete?: never;
         options?: never;
         head?: never;
@@ -1174,6 +1217,76 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/wealth/documents/{id}/share": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Share a document by email with a link that expires in 7 days */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["DocumentShareRequest"];
+                };
+            };
+            responses: {
+                /** @description Share created */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["DocumentShareResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/health": {
         parameters: {
             query?: never;
@@ -1493,6 +1606,14 @@ export interface components {
         };
         /** @enum {string} */
         AccountType: "TFSA" | "RRSP" | "RESP" | "RDSP" | "FHSA" | "NON_REGISTERED" | "LIRA" | "RRIF";
+        AccountOpenRequest: {
+            type: components["schemas"]["OpenableAccountType"];
+            /** @example Travel TFSA */
+            displayName: string;
+            nickname?: string;
+        };
+        /** @enum {string} */
+        OpenableAccountType: "TFSA" | "RRSP" | "FHSA" | "NON_REGISTERED";
         AccountDetail: components["schemas"]["AccountSummary"] & {
             holdings: components["schemas"]["Holding"][];
         };
@@ -1594,6 +1715,22 @@ export interface components {
             url: string;
             contentType: string;
             base64Stub: string;
+        };
+        DocumentShareResponse: {
+            /** Format: email */
+            recipient: string;
+            /**
+             * Format: date-time
+             * @description The shared link stops working after this time (7 days)
+             */
+            expiresAt: string;
+        };
+        DocumentShareRequest: {
+            /**
+             * Format: email
+             * @example accountant@example.com
+             */
+            recipient: string;
         };
         HealthResponse: {
             /** @enum {string} */

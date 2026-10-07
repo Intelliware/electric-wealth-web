@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router';
 import { api, unwrap } from '../../api/client';
-import { useDocuments } from '../../api/hooks';
+import { useDocuments, useShareDocument } from '../../api/hooks';
 import { Card, EmptyState, ErrorState, Loading, PageHeader, Segmented, Tag } from '../../components/ui';
 import { getAppLocale } from '../../i18n';
-import { formatBytes } from '../../lib/format';
+import { formatBytes, formatDateTime } from '../../lib/format';
 
 type YearFilter = 'all' | '2024' | '2023';
 type CategoryFilter = 'all' | 'Tax' | 'Statements' | 'Confirmations' | 'Legal';
@@ -19,6 +19,7 @@ export function DocumentsPage() {
   const [category, setCategory] = useState<CategoryFilter>('all');
   const [search, setSearch] = useState('');
   const [downloading, setDownloading] = useState<string | null>(null);
+  const [sharing, setSharing] = useState<{ id: string; name: string } | null>(null);
 
   const { data, isLoading, error, refetch } = useDocuments({
     year: year === 'all' ? undefined : Number(year),
@@ -90,7 +91,7 @@ export function DocumentsPage() {
                 <th scope="col">{t('web.account_label')}</th>
                 <th scope="col">{t('web.year')}</th>
                 <th scope="col" className="num">{t('web.size')}</th>
-                <th scope="col"><span className="sr-only">{t('web.download')}</span></th>
+                <th scope="col"><span className="sr-only">{t('web.actions')}</span></th>
               </tr>
             </thead>
             <tbody>
@@ -106,7 +107,7 @@ export function DocumentsPage() {
                   <td>{doc.accountId ? doc.accountLabel : t('web.all_accounts')}</td>
                   <td>{doc.year}</td>
                   <td className="num">{formatBytes(doc.sizeBytes, locale)}</td>
-                  <td className="num">
+                  <td className="num nowrap">
                     <button
                       type="button"
                       className="btn btn--ghost btn--sm"
@@ -115,6 +116,9 @@ export function DocumentsPage() {
                     >
                       {t('web.download')}
                     </button>
+                    <button type="button" className="btn btn--ghost btn--sm" onClick={() => setSharing({ id: doc.id, name: doc.name })}>
+                      {t('common.share')}
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -122,6 +126,66 @@ export function DocumentsPage() {
           </table>
         )}
       </Card>
+
+      {sharing ? <ShareDialog document={sharing} onClose={() => setSharing(null)} /> : null}
     </>
+  );
+}
+
+/** Modal that sends a time-limited link to a document by email. */
+function ShareDialog({ document: doc, onClose }: { document: { id: string; name: string }; onClose: () => void }) {
+  const { t } = useTranslation();
+  const locale = getAppLocale();
+  const dialog = useRef<HTMLDialogElement>(null);
+  const share = useShareDocument();
+  const [recipient, setRecipient] = useState('');
+
+  useEffect(() => {
+    dialog.current?.showModal();
+  }, []);
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    share.mutate({ id: doc.id, recipient });
+  };
+
+  return (
+    <dialog ref={dialog} className="dialog" aria-labelledby="share-title" onClose={onClose}>
+      <h2 id="share-title">{t('documents.share_title')}</h2>
+      <p className="muted">{doc.name}</p>
+      {share.data ? (
+        <>
+          <p className="notice" role="status">
+            {t('documents.share_success')}: {share.data.recipient}.{' '}
+            {t('web.share_expires', { time: formatDateTime(share.data.expiresAt, locale) })}
+          </p>
+          <div className="form__actions" style={{ marginTop: 16 }}>
+            <button type="button" className="btn btn--primary" onClick={() => dialog.current?.close()} autoFocus>
+              {t('common.done')}
+            </button>
+          </div>
+        </>
+      ) : (
+        <form className="form" onSubmit={onSubmit}>
+          <label>
+            {t('documents.share_recipient')}
+            <input type="email" value={recipient} onChange={(e) => setRecipient(e.target.value)} required autoFocus />
+          </label>
+          {share.error ? (
+            <p className="form__error" role="alert">
+              {t('common.error_generic')}
+            </p>
+          ) : null}
+          <div className="form__actions">
+            <button type="submit" className="btn btn--primary" disabled={share.isPending}>
+              {t('documents.share_confirm')}
+            </button>
+            <button type="button" className="btn btn--secondary" onClick={() => dialog.current?.close()}>
+              {t('common.cancel')}
+            </button>
+          </div>
+        </form>
+      )}
+    </dialog>
   );
 }

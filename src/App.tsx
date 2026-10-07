@@ -3,6 +3,7 @@ import { Link, Navigate, Route, Routes, useLocation } from 'react-router';
 import { useAuth } from './auth/AuthContext';
 import { EmptyState } from './components/ui';
 import { Layout } from './components/Layout';
+import { AccountOpenPage } from './features/accounts/AccountOpenPage';
 import { AccountDetailPage } from './features/accounts/AccountDetailPage';
 import { AccountsPage } from './features/accounts/AccountsPage';
 import { LoginPage, MfaPage } from './features/auth/AuthPages';
@@ -47,6 +48,7 @@ export function App() {
       <Route element={<Layout />}>
         <Route index element={<DashboardPage />} />
         <Route path="accounts" element={<AccountsPage />} />
+        <Route path="accounts/new" element={<AccountOpenPage />} />
         <Route path="accounts/:id" element={<AccountDetailPage />} />
         <Route path="documents" element={<DocumentsPage />} />
         <Route path="goals" element={<GoalsPage />} />

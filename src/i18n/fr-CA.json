@@ -184,7 +184,7 @@
     "empty_body": "Vos relevés et feuillets d'impôt apparaîtront ici.",
     "share_title": "Partager le document",
     "share_recipient": "Courriel du destinataire",
-    "share_confirm": "Créer un lien sécurisé (24 h)",
+    "share_confirm": "Envoyer un lien sécurisé (7 jours)",
     "share_success": "Lien sécurisé créé et envoyé",
     "action_required": "Action requise"
   },
@@ -409,6 +409,34 @@
     "notifications_unread_one": "Notifications, {{count}} non lue",
     "notifications_unread_other": "Notifications, {{count}} non lues",
     "nav_goals": "Objectifs",
-    "goal_invalid": "Veuillez vérifier l’objectif. La date cible doit être dans le futur et le montant actuel ne peut pas dépasser la cible."
+    "goal_invalid": "Veuillez vérifier l’objectif. La date cible doit être dans le futur et le montant actuel ne peut pas dépasser la cible.",
+    "actions": "Actions",
+    "share_expires": "Expiration du lien : {{time}}",
+    "account_type": "Type de compte",
+    "account_name": "Nom du compte",
+    "default_account_name": "Compte {{type}}",
+    "open_account_confirm": "Ouvrir le compte",
+    "view_account": "Aller à {{name}}",
+    "back_to_accounts": "Retour aux comptes",
+    "no_performance_title": "Aucun historique de rendement",
+    "no_performance_body": "Le rendement s’affiche lorsque le compte a été approvisionné pendant un mois complet.",
+    "account_types": {
+      "TFSA": {
+        "name": "CELI",
+        "description": "Compte d’épargne libre d’impôt. La croissance et les retraits sont libres d’impôt."
+      },
+      "RRSP": {
+        "name": "REER",
+        "description": "Régime enregistré d’épargne-retraite. Les cotisations réduisent votre revenu imposable."
+      },
+      "FHSA": {
+        "name": "CELIAPP",
+        "description": "Compte d’épargne libre d’impôt pour l’achat d’une première propriété."
+      },
+      "NON_REGISTERED": {
+        "name": "Non enregistré",
+        "description": "Un compte de placement souple, sans plafond de cotisation."
+      }
+    }
   }
 }

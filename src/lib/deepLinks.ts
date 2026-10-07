@@ -12,7 +12,8 @@ export function deepLinkToRoute(deepLink: string | undefined): string | undefine
     case 'documents':
       return id ? `/documents?highlight=${encodeURIComponent(id)}` : '/documents';
     case 'accounts':
-      if (!id || id === 'new') return '/accounts';
+      if (!id) return '/accounts';
+      if (id === 'new') return '/accounts/new';
       return `/accounts/${encodeURIComponent(id)}`;
     case 'notifications':
       return '/notifications';

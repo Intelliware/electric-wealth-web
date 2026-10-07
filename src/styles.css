@@ -323,6 +323,11 @@ select {
   flex-direction: column;
   gap: 16px;
 }
+.page-header__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
 .page-header {
   display: flex;
   align-items: flex-end;
@@ -1132,4 +1137,113 @@ a.quick-link:hover {
   .form__row--2 {
     grid-template-columns: 2fr 1fr;
   }
+}
+
+/* Account opening */
+.stepper {
+  list-style: none;
+  margin: 8px 0 16px;
+  padding: 0;
+  display: flex;
+  gap: 8px;
+  counter-reset: step;
+  flex-wrap: wrap;
+}
+.stepper li {
+  counter-increment: step;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+.stepper li::before {
+  content: counter(step);
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  font-size: 13px;
+}
+.stepper li + li::after {
+  order: -1;
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--border-strong);
+}
+.stepper li.is-current {
+  color: var(--text);
+}
+.stepper li.is-current::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-primary);
+}
+.stepper li.is-done::before {
+  content: '✓';
+  background: var(--success-bg);
+  border-color: var(--success-text);
+  color: var(--success-text);
+}
+.choice-list {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.choice-list legend {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.choice {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  gap: 12px !important;
+  padding: 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+}
+.choice.is-selected {
+  border-color: var(--accent);
+  background: var(--info-bg);
+}
+.choice input {
+  width: auto;
+  min-height: 0;
+  margin-top: 3px;
+  accent-color: var(--accent);
+}
+.choice > span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-weight: 400;
+}
+
+/* Dialog */
+.dialog {
+  width: min(460px, calc(100vw - 32px));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--bg-raised);
+  color: var(--text);
+  padding: 24px;
+}
+.dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+.dialog h2 {
+  margin-bottom: 4px;
+}
+.nowrap {
+  white-space: nowrap;
 }

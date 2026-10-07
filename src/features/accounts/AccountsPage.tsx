@@ -24,9 +24,14 @@ export function AccountsPage() {
       <PageHeader
         title={t('accounts.title')}
         actions={
-          <button type="button" className="btn btn--ghost" onClick={() => setHideBalances((h) => !h)} aria-pressed={hideBalances}>
-            {hideBalances ? t('accounts.show_balances') : t('accounts.hide_balances')}
-          </button>
+          <>
+            <button type="button" className="btn btn--ghost" onClick={() => setHideBalances((h) => !h)} aria-pressed={hideBalances}>
+              {hideBalances ? t('accounts.show_balances') : t('accounts.hide_balances')}
+            </button>
+            <Link to="/accounts/new" className="btn btn--primary">
+              {t('accounts.open_account')}
+            </Link>
+          </>
         }
       />
 
