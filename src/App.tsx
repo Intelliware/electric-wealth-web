@@ -3,6 +3,8 @@ import { Link, Navigate, Route, Routes, useLocation } from 'react-router';
 import { useAuth } from './auth/AuthContext';
 import { EmptyState } from './components/ui';
 import { Layout } from './components/Layout';
+import { AdvisorMessagesPage } from './features/advisor/AdvisorMessagesPage';
+import { AdvisorPage } from './features/advisor/AdvisorPage';
 import { AccountOpenPage } from './features/accounts/AccountOpenPage';
 import { AccountDetailPage } from './features/accounts/AccountDetailPage';
 import { AccountsPage } from './features/accounts/AccountsPage';
@@ -52,6 +54,8 @@ export function App() {
         <Route path="accounts" element={<AccountsPage />} />
         <Route path="accounts/new" element={<AccountOpenPage />} />
         <Route path="accounts/:id" element={<AccountDetailPage />} />
+        <Route path="advisor" element={<AdvisorPage />} />
+        <Route path="advisor/messages" element={<AdvisorMessagesPage />} />
         <Route path="documents" element={<DocumentsPage />} />
         <Route path="goals" element={<GoalsPage />} />
         <Route path="learn" element={<LearnPage />} />

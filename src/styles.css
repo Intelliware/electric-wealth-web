@@ -221,7 +221,8 @@ a {
   font-size: 14px;
 }
 input,
-select {
+select,
+textarea {
   font: inherit;
   color: var(--text);
   background: var(--bg-raised);
@@ -1274,4 +1275,158 @@ a.quick-link:hover {
 .glossary dd {
   margin: 4px 0 0;
   color: var(--text-muted);
+}
+
+/* Advisor */
+.advisor-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.advisor-card > div {
+  flex: 1;
+  min-width: 160px;
+}
+.advisor-card__name {
+  font-weight: 600;
+  font-size: 16px;
+}
+.avatar--lg {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  font-size: 17px;
+}
+.advisor-layout {
+  align-items: start;
+}
+.booking__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.booking__label {
+  font-weight: 500;
+  font-size: 14px;
+}
+.day-picker {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+.day-picker button,
+.slot-picker button {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  cursor: pointer;
+}
+.day-picker button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 4px;
+}
+.day-picker button strong {
+  font-size: 19px;
+}
+.day-picker button.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-primary);
+}
+.day-picker button:disabled,
+.slot-picker button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.slot-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+.slot-picker button {
+  padding: 10px 6px;
+  font-weight: 500;
+  background: var(--bg-raised);
+  border-color: var(--border-strong);
+}
+.slot-picker button.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.meeting-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.meeting {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.meeting:first-child {
+  padding-top: 0;
+}
+.meeting:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.meeting__when {
+  font-weight: 600;
+}
+.meeting__actions {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+}
+.thread {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.bubble {
+  max-width: min(85%, 560px);
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--bg-sunken);
+  align-self: flex-start;
+}
+.bubble--client {
+  align-self: flex-end;
+  background: var(--accent-soft);
+}
+.bubble__time {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.composer {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.composer__input {
+  flex: 1;
+}
+.composer textarea {
+  resize: vertical;
+  min-height: 44px;
 }

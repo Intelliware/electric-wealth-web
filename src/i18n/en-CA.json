@@ -442,6 +442,22 @@
     "lessons_completed": "{{done}} of {{total}} completed",
     "level": "Level",
     "completed": "Completed",
-    "mark_complete": "Mark complete"
+    "mark_complete": "Mark complete",
+    "nav_advisor": "Advisor",
+    "message_advisor": "Message {{name}}",
+    "upcoming_meetings": "Upcoming meetings",
+    "past_meetings": "Past and cancelled",
+    "no_upcoming_meetings": "No meetings booked",
+    "cancel_meeting": "Cancel meeting",
+    "cancel_meeting_confirm": "Cancel this meeting?",
+    "meeting_status_completed": "Completed",
+    "meeting_status_cancelled": "Cancelled",
+    "rescheduling_from": "Moving your meeting on {{when}}.",
+    "no_slots": "No times left on this day.",
+    "meeting_notes": "What would you like to discuss? (optional)",
+    "meeting_notes_placeholder": "e.g. Year-end tax planning",
+    "slot_taken": "That time was just taken. Please choose another.",
+    "reschedule_to": "Move to {{time}}",
+    "you": "You"
   }
 }

@@ -442,6 +442,22 @@
     "lessons_completed": "{{done}} sur {{total}} terminés",
     "level": "Niveau",
     "completed": "Terminé",
-    "mark_complete": "Marquer comme terminé"
+    "mark_complete": "Marquer comme terminé",
+    "nav_advisor": "Conseiller",
+    "message_advisor": "Écrire à {{name}}",
+    "upcoming_meetings": "Rencontres à venir",
+    "past_meetings": "Passées et annulées",
+    "no_upcoming_meetings": "Aucune rencontre prévue",
+    "cancel_meeting": "Annuler la rencontre",
+    "cancel_meeting_confirm": "Annuler cette rencontre?",
+    "meeting_status_completed": "Terminée",
+    "meeting_status_cancelled": "Annulée",
+    "rescheduling_from": "Déplacement de votre rencontre du {{when}}.",
+    "no_slots": "Plus aucune plage horaire ce jour-là.",
+    "meeting_notes": "De quoi aimeriez-vous discuter? (facultatif)",
+    "meeting_notes_placeholder": "p. ex. Planification fiscale de fin d’année",
+    "slot_taken": "Cette plage vient d’être réservée. Veuillez en choisir une autre.",
+    "reschedule_to": "Déplacer à {{time}}",
+    "you": "Vous"
   }
 }

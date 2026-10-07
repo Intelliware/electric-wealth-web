@@ -4,6 +4,354 @@
  */
 
 export interface paths {
+    "/api/advisor/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Open meeting slots with the user's advisor over the next five business days */
+        get: {
+            parameters: {
+                query?: {
+                    /** @description Accepted for v1 compatibility; every type has the same slots */
+                    meetingType?: components["schemas"]["MeetingType"] & unknown;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Availability */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["AvailabilityResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/advisor/appointments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The user's meetings (past and upcoming), oldest first */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Appointments */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["AppointmentsResponse"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Book a meeting in an open slot */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["AppointmentCreateRequest"];
+                };
+            };
+            responses: {
+                /** @description Booked */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Appointment"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Conflicts with the current state (e.g. the slot was just taken) */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/advisor/appointments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Reschedule (new date and time) or cancel a scheduled meeting */
+        patch: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    id: string;
+                };
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["AppointmentPatchRequest"];
+                };
+            };
+            responses: {
+                /** @description Updated appointment */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["Appointment"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Conflicts with the current state (e.g. the slot was just taken) */
+                409: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        trace?: never;
+    };
+    "/api/advisor/messages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Secure message thread with the advisor, oldest first */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Messages */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["AdvisorMessagesResponse"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        /** Send a message to the advisor */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["AdvisorMessageCreateRequest"];
+                };
+            };
+            responses: {
+                /** @description Sent message */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["AdvisorMessage"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/auth/token": {
         parameters: {
             query?: never;
@@ -1513,14 +1861,28 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        TokenResponse: {
-            accessToken: string;
-            refreshToken: string;
-            /** @enum {string} */
-            tokenType: "Bearer";
-            /** @enum {number} */
-            expiresIn: 900;
-            mfaRequired: boolean;
+        AvailabilityResponse: {
+            advisor: components["schemas"]["AdvisorInfo"];
+            meetingTypes: components["schemas"]["MeetingType"][];
+            /** @description The next five business days, starting tomorrow */
+            days: components["schemas"]["AvailabilityDay"][];
+        };
+        AdvisorInfo: {
+            id: string;
+            name: string;
+            designation?: string;
+            available: boolean;
+        };
+        /** @enum {string} */
+        MeetingType: "video" | "phone" | "in_person";
+        AvailabilityDay: {
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            date: string;
+            /** @description Open start times, Toronto time */
+            slots: string[];
         };
         ErrorEnvelope: {
             error: {
@@ -1529,6 +1891,66 @@ export interface components {
                 message: string;
                 traceId: string;
             };
+        };
+        AppointmentsResponse: components["schemas"]["Appointment"][];
+        Appointment: {
+            id: string;
+            advisorId: string;
+            meetingType: components["schemas"]["MeetingType"];
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            date: string;
+            /** @example 14:30 */
+            time: string;
+            status: components["schemas"]["AppointmentStatus"];
+            notes?: string;
+        };
+        /** @enum {string} */
+        AppointmentStatus: "scheduled" | "completed" | "cancelled";
+        AppointmentCreateRequest: {
+            meetingType: components["schemas"]["MeetingType"];
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            date: string;
+            /** @example 14:30 */
+            time: string;
+            notes?: string;
+        };
+        AppointmentPatchRequest: {
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            date?: string;
+            /** @example 14:30 */
+            time?: string;
+            /** @enum {string} */
+            status?: "cancelled";
+        };
+        AdvisorMessagesResponse: components["schemas"]["AdvisorMessage"][];
+        AdvisorMessage: {
+            id: string;
+            /** @enum {string} */
+            from: "advisor" | "client";
+            text: string;
+            /** Format: date-time */
+            at: string;
+        };
+        AdvisorMessageCreateRequest: {
+            text: string;
+        };
+        TokenResponse: {
+            accessToken: string;
+            refreshToken: string;
+            /** @enum {string} */
+            tokenType: "Bearer";
+            /** @enum {number} */
+            expiresIn: 900;
+            mfaRequired: boolean;
         };
         TokenRequest: {
             /** @enum {string} */
@@ -1727,8 +2149,6 @@ export interface components {
         DocumentDelivery: "digital" | "paper_and_digital";
         /** @enum {string} */
         Theme: "light" | "dark" | "system";
-        /** @enum {string} */
-        MeetingType: "video" | "phone" | "in_person";
         PreferencesUpdate: {
             notifications?: {
                 email?: boolean;

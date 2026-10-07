@@ -20,6 +20,9 @@ export const queryKeys = {
   goals: ['goals'] as const,
   education: (locale: string, level?: string) => ['education', locale, level ?? 'all'] as const,
   glossary: (locale: string, q: string) => ['glossary', locale, q] as const,
+  availability: ['advisor', 'availability'] as const,
+  appointments: ['advisor', 'appointments'] as const,
+  advisorMessages: ['advisor', 'messages'] as const,
 };
 
 export function useDashboard() {
@@ -225,5 +228,56 @@ export function useGlossary(q: string) {
     queryKey: queryKeys.glossary(i18n.language, q),
     queryFn: async () => unwrap(await api.GET('/api/education/glossary', { params: { query: { q: q || undefined } } })),
     placeholderData: keepPreviousData,
+  });
+}
+
+export function useAdvisorAvailability() {
+  return useQuery({
+    queryKey: queryKeys.availability,
+    queryFn: async () => unwrap(await api.GET('/api/advisor/availability')),
+  });
+}
+
+export function useAppointments() {
+  return useQuery({
+    queryKey: queryKeys.appointments,
+    queryFn: async () => unwrap(await api.GET('/api/advisor/appointments')),
+  });
+}
+
+/** Booking, rescheduling or cancelling changes which slots are open, so both lists are refetched. */
+function useAppointmentMutation<T>(fn: (input: T) => Promise<Schemas['Appointment']>) {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: fn,
+    onSettled: () => void qc.invalidateQueries({ queryKey: ['advisor'] }),
+  });
+}
+
+export function useBookAppointment() {
+  return useAppointmentMutation(async (body: Schemas['AppointmentCreateRequest']) =>
+    unwrap(await api.POST('/api/advisor/appointments', { body })),
+  );
+}
+
+export function useUpdateAppointment() {
+  return useAppointmentMutation(async ({ id, ...body }: { id: string } & Schemas['AppointmentPatchRequest']) =>
+    unwrap(await api.PATCH('/api/advisor/appointments/{id}', { params: { path: { id } }, body })),
+  );
+}
+
+export function useAdvisorMessages() {
+  return useQuery({
+    queryKey: queryKeys.advisorMessages,
+    queryFn: async () => unwrap(await api.GET('/api/advisor/messages')),
+  });
+}
+
+export function useSendAdvisorMessage() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (text: string) => unwrap(await api.POST('/api/advisor/messages', { body: { text } })),
+    onSuccess: (message) =>
+      qc.setQueryData<Schemas['AdvisorMessage'][]>(queryKeys.advisorMessages, (list) => [...(list ?? []), message]),
   });
 }

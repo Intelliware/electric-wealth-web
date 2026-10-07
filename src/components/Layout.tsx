@@ -48,6 +48,7 @@ export function Layout() {
             <NavLink to="/documents">{t('web.nav_documents')}</NavLink>
             <NavLink to="/goals">{t('web.nav_goals')}</NavLink>
             <NavLink to="/learn">{t('web.nav_learn')}</NavLink>
+            <NavLink to="/advisor">{t('web.nav_advisor')}</NavLink>
           </nav>
           <div className="topbar__actions">
             <NotificationBell />

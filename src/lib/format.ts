@@ -59,3 +59,21 @@ export function initials(name?: string): string {
     .map((part) => part[0]!.toUpperCase())
     .join('');
 }
+
+/** A 24h slot time ('14:30') shown in the user's locale (2:30 p.m. / 14 h 30). */
+export function formatSlotTime(time: string, locale: string): string {
+  const [h, m] = time.split(':').map(Number);
+  return new Intl.DateTimeFormat(locale, { hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }).format(
+    new Date(Date.UTC(2000, 0, 1, h, m)),
+  );
+}
+
+/** A calendar date ('2026-10-12') as a short weekday + day, e.g. Mon 12. */
+export function formatDayParts(date: string, locale: string) {
+  const d = new Date(`${date}T12:00:00Z`);
+  return {
+    weekday: new Intl.DateTimeFormat(locale, { weekday: 'short', timeZone: 'UTC' }).format(d),
+    day: d.getUTCDate(),
+    full: new Intl.DateTimeFormat(locale, { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(d),
+  };
+}
