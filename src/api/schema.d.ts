@@ -280,6 +280,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/profile/address": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Replace the mailing address */
+        put: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            /** @description JSON body */
+            requestBody?: {
+                content: {
+                    "application/json": components["schemas"]["ProfileAddressUpdate"];
+                };
+            };
+            responses: {
+                /** @description Updated profile */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ProfileResponse"];
+                    };
+                };
+                /** @description Validation error */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Missing, expired or not MFA-verified access token */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+                /** @description Resource not found */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorEnvelope"];
+                    };
+                };
+            };
+        };
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/preferences": {
         parameters: {
             query?: never;
@@ -979,6 +1047,20 @@ export interface components {
             name: string;
             relationship: string;
         };
+        ProfileAddressUpdate: {
+            address: {
+                line1: string;
+                line2?: string;
+                city: string;
+                province: components["schemas"]["Province"];
+                /** @example M5V 2A1 */
+                postalCode: string;
+                /** @enum {string} */
+                country: "Canada";
+            };
+        };
+        /** @enum {string} */
+        Province: "AB" | "BC" | "MB" | "NB" | "NL" | "NS" | "NT" | "NU" | "ON" | "PE" | "QC" | "SK" | "YT";
         PreferencesResponse: {
             notifications: components["schemas"]["NotificationPrefs"];
             documentDelivery: components["schemas"]["DocumentDelivery"];
@@ -1000,7 +1082,11 @@ export interface components {
         /** @enum {string} */
         MeetingType: "video" | "phone" | "in_person";
         PreferencesUpdate: {
-            notifications?: components["schemas"]["NotificationPrefs"];
+            notifications?: {
+                email?: boolean;
+                sms?: boolean;
+                push?: boolean;
+            };
             documentDelivery?: components["schemas"]["DocumentDelivery"];
             language?: components["schemas"]["Language"];
             theme?: components["schemas"]["Theme"];

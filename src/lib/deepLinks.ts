@@ -14,7 +14,11 @@ export function deepLinkToRoute(deepLink: string | undefined): string | undefine
     case 'accounts':
       if (!id || id === 'new') return '/accounts';
       return `/accounts/${encodeURIComponent(id)}`;
+    case 'profile':
+      return '/profile';
+    case 'settings':
+      return '/settings';
     default:
-      return undefined; // advisor, market, learn, profile: not on web yet
+      return undefined; // advisor, market, learn: not on web yet
   }
 }

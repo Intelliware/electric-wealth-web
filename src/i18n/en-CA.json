@@ -305,7 +305,30 @@
     "line2": "Address line 2 (optional)",
     "city": "City",
     "province": "Province",
-    "country": "Country"
+    "country": "Country",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "sin": "SIN",
+    "contact_to_change": "To change these details, contact your advisor.",
+    "no_trusted_contact": "No trusted contact on file.",
+    "postal_code_hint": "A Canadian postal code, e.g. M5V 2A1",
+    "address_invalid": "Please check the address. The postal code must be Canadian, e.g. M5V 2A1.",
+    "provinces": {
+      "AB": "Alberta",
+      "BC": "British Columbia",
+      "MB": "Manitoba",
+      "NB": "New Brunswick",
+      "NL": "Newfoundland and Labrador",
+      "NS": "Nova Scotia",
+      "NT": "Northwest Territories",
+      "NU": "Nunavut",
+      "ON": "Ontario",
+      "PE": "Prince Edward Island",
+      "QC": "Quebec",
+      "SK": "Saskatchewan",
+      "YT": "Yukon"
+    }
   },
   "settings": {
     "title": "Settings",
@@ -329,7 +352,9 @@
     "help_center": "Help centre",
     "contact_support": "Contact support",
     "privacy_policy": "Privacy policy",
-    "terms_of_service": "Terms of service"
+    "terms_of_service": "Terms of service",
+    "saving": "Saving…",
+    "saved": "Saved"
   },
   "more": {
     "title": "More",
@@ -377,6 +402,7 @@
     "account_label": "Account",
     "all_accounts": "All accounts",
     "size": "Size",
-    "year": "Year"
+    "year": "Year",
+    "user_menu": "Account menu"
   }
 }

@@ -34,6 +34,14 @@ export function useProfile() {
   });
 }
 
+export function useUpdateAddress() {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: async (body: Schemas['ProfileAddressUpdate']) => unwrap(await api.PUT('/api/profile/address', { body })),
+    onSuccess: (profile) => qc.setQueryData(queryKeys.profile, profile),
+  });
+}
+
 export function usePreferences() {
   return useQuery({
     queryKey: queryKeys.preferences,
@@ -46,6 +54,22 @@ export function useUpdatePreferences() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (body: Schemas['PreferencesUpdate']) => unwrap(await api.PUT('/api/preferences', { body })),
+    // Show the change straight away; roll back if the API rejects it.
+    onMutate: async (change) => {
+      await qc.cancelQueries({ queryKey: queryKeys.preferences });
+      const previous = qc.getQueryData<Schemas['PreferencesResponse']>(queryKeys.preferences);
+      if (previous) {
+        qc.setQueryData(queryKeys.preferences, {
+          ...previous,
+          ...change,
+          notifications: { ...previous.notifications, ...change.notifications },
+        });
+      }
+      return { previous };
+    },
+    onError: (_error, _change, context) => {
+      if (context?.previous) qc.setQueryData(queryKeys.preferences, context.previous);
+    },
     onSuccess: (prefs) => qc.setQueryData(queryKeys.preferences, prefs),
   });
 }

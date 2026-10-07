@@ -305,7 +305,30 @@
     "line2": "Ligne d'adresse 2 (facultatif)",
     "city": "Ville",
     "province": "Province",
-    "country": "Pays"
+    "country": "Pays",
+    "name": "Nom",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "sin": "NAS",
+    "contact_to_change": "Pour modifier ces renseignements, communiquez avec votre conseiller.",
+    "no_trusted_contact": "Aucun contact de confiance au dossier.",
+    "postal_code_hint": "Un code postal canadien, p. ex. M5V 2A1",
+    "address_invalid": "Veuillez vérifier l’adresse. Le code postal doit être canadien, p. ex. M5V 2A1.",
+    "provinces": {
+      "AB": "Alberta",
+      "BC": "Colombie-Britannique",
+      "MB": "Manitoba",
+      "NB": "Nouveau-Brunswick",
+      "NL": "Terre-Neuve-et-Labrador",
+      "NS": "Nouvelle-Écosse",
+      "NT": "Territoires du Nord-Ouest",
+      "NU": "Nunavut",
+      "ON": "Ontario",
+      "PE": "Île-du-Prince-Édouard",
+      "QC": "Québec",
+      "SK": "Saskatchewan",
+      "YT": "Yukon"
+    }
   },
   "settings": {
     "title": "Paramètres",
@@ -329,7 +352,9 @@
     "help_center": "Centre d'aide",
     "contact_support": "Communiquer avec le soutien",
     "privacy_policy": "Politique de confidentialité",
-    "terms_of_service": "Conditions d'utilisation"
+    "terms_of_service": "Conditions d'utilisation",
+    "saving": "Enregistrement…",
+    "saved": "Enregistré"
   },
   "more": {
     "title": "Plus",
@@ -377,6 +402,7 @@
     "account_label": "Compte",
     "all_accounts": "Tous les comptes",
     "size": "Taille",
-    "year": "Année"
+    "year": "Année",
+    "user_menu": "Menu du compte"
   }
 }
