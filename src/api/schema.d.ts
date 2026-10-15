@@ -4,179 +4,7 @@
  */
 
 export interface paths {
-    "/api/advisor/availability": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Open meeting slots with the user's advisor over the next five business days */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Accepted for v1 compatibility; every type has the same slots */
-                    meetingType?: components["schemas"]["MeetingType"] & unknown;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Availability */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AvailabilityResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/advisor/appointments": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** The user's meetings (past and upcoming), oldest first */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Appointments */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AppointmentsResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        /** Book a meeting in an open slot */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["AppointmentCreateRequest"];
-                };
-            };
-            responses: {
-                /** @description Booked */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Appointment"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Conflicts with the current state (e.g. the slot was just taken) */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/advisor/appointments/{id}": {
+    "/api/profile/address": {
         parameters: {
             query?: never;
             header?: never;
@@ -184,448 +12,8 @@ export interface paths {
             cookie?: never;
         };
         get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        /** Reschedule (new date and time) or cancel a scheduled meeting */
-        patch: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["AppointmentPatchRequest"];
-                };
-            };
-            responses: {
-                /** @description Updated appointment */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Appointment"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Conflicts with the current state (e.g. the slot was just taken) */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        trace?: never;
-    };
-    "/api/advisor/messages": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Secure message thread with the advisor, oldest first */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Messages */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AdvisorMessagesResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        /** Send a message to the advisor */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["AdvisorMessageCreateRequest"];
-                };
-            };
-            responses: {
-                /** @description Sent message */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AdvisorMessage"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/token": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Sign in with email and password
-         * @description Returns a session that still requires MFA (`mfaRequired: true`). Call `/api/auth/mfa/verify` next.
-         */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["TokenRequest"];
-                };
-            };
-            responses: {
-                /** @description Session created; MFA required */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TokenResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/mfa/verify": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Complete MFA for the current session
-         * @description Send the access token from `/api/auth/token` as a Bearer token. The demo code is `123456`.
-         */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["MfaVerifyRequest"];
-                };
-            };
-            responses: {
-                /** @description Session is now MFA-verified */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["MfaVerifyResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/refresh": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Exchange a refresh token for a new session */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["RefreshRequest"];
-                };
-            };
-            responses: {
-                /** @description New tokens */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["RefreshResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/logout": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Revoke the current session */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["LogoutRequest"];
-                };
-            };
-            responses: {
-                /** @description Signed out */
-                204: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/education/content": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Learning centre catalogue with the user’s progress */
-        get: {
-            parameters: {
-                query?: {
-                    level?: components["schemas"]["EducationLevel"];
-                    type?: components["schemas"]["EducationType"];
-                };
-                header?: {
-                    "accept-language"?: components["schemas"]["Language"];
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Classes and challenges */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EducationContentResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
+        /** Replace the mailing address */
+        put: operations["updateAddress"];
         post?: never;
         delete?: never;
         options?: never;
@@ -633,641 +21,17 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/education/glossary": {
+    "/api/preferences": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Financial glossary, A to Z, optionally filtered */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Matches the term or definition, case-insensitive */
-                    q?: string;
-                };
-                header?: {
-                    "accept-language"?: components["schemas"]["Language"];
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Glossary entries */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GlossaryResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/education/progress": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Save progress on a class or challenge */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["EducationProgressRequest"];
-                };
-            };
-            responses: {
-                /** @description Saved progress */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["EducationProgressResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/wealth/goals": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** List savings goals */
-        get: {
-            parameters: {
-                query?: {
-                    page?: number;
-                    pageSize?: number;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Goals */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["GoalsListResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        /** Create a savings goal */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["GoalCreateRequest"];
-                };
-            };
-            responses: {
-                /** @description Created goal */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["Goal"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/quote": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Quotes, with held and watched flags for the user */
-        get: {
-            parameters: {
-                query?: {
-                    /** @description Comma-separated symbols. Omit for every listed security. */
-                    symbols?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Quotes, with held and watched flags for the user */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["QuotesResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/securities/{symbol}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** One security with its quote and description */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    symbol: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description One security with its quote and description */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["SecurityDetail"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/history": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Closing prices over a range */
-        get: {
-            parameters: {
-                query: {
-                    symbol: string;
-                    range?: components["schemas"]["HistoryRange"];
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Closing prices over a range */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["HistoryResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Find securities by symbol or name */
-        get: {
-            parameters: {
-                query?: {
-                    q?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Find securities by symbol or name */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["SearchResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/news": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Market headlines, newest first */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Market headlines, newest first */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["NewsResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/roundup": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** This week's market roundup */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description This week's market roundup */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["RoundupResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/baskets": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Thematic baskets */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Thematic baskets */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["BasketsResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/market/watchlist": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Quotes for the user's watchlist, in the order added */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Quotes for the user's watchlist, in the order added */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["QuotesResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
+        /** Signed-in user preferences */
+        get: operations["preferences"];
+        /** Update preferences (partial update) */
+        put: operations["updatePreferences"];
         post?: never;
         delete?: never;
         options?: never;
@@ -1284,157 +48,34 @@ export interface paths {
         };
         get?: never;
         /** Add a security to the watchlist (no-op if already there) */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    symbol: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description The updated watchlist */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["QuotesResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        put: operations["addToWatchlist"];
         post?: never;
         /** Remove a security from the watchlist */
-        delete: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    symbol: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description The updated watchlist */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["QuotesResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        delete: operations["removeFromWatchlist"];
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/api/notifications": {
+    "/api/wealth/goals": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** All notifications, newest first */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Notifications */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["NotificationsResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        /** List savings goals */
+        get: operations["list"];
         put?: never;
-        post?: never;
+        /** Create a savings goal */
+        post: operations["create"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/api/notifications/{id}/read": {
+    "/api/wealth/documents/{id}/share": {
         parameters: {
             query?: never;
             header?: never;
@@ -1443,382 +84,26 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Mark one notification as read */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Marked as read */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["NotificationReadResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        /** Share a document by email with a link that expires in 7 days */
+        post: operations["share"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/api/notifications/read-all": {
+    "/api/wealth/accounts": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** List visible accounts */
+        get: operations["list_1"];
         put?: never;
-        /** Mark every notification as read */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Marked as read */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["NotificationsReadAllResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/profile": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Signed-in user profile */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Profile */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ProfileResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/profile/address": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        /** Replace the mailing address */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["ProfileAddressUpdate"];
-                };
-            };
-            responses: {
-                /** @description Updated profile */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ProfileResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/preferences": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Signed-in user preferences */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Preferences */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["PreferencesResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        /** Update preferences (partial update) */
-        put: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["PreferencesUpdate"];
-                };
-            };
-            responses: {
-                /** @description Updated preferences */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["PreferencesResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/registration/start": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Step 1: choose a login (email and password)
-         * @description Starts online enrolment for an existing client. 409 EMAIL_TAKEN if the email already has online access.
-         */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["RegistrationStartRequest"];
-                };
-            };
-            responses: {
-                /** @description Step 1: choose a login (email and password) */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["RegistrationStartResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Conflicts with the current state (e.g. the slot was just taken) */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        /** Open a new, empty account */
+        post: operations["open"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1838,157 +123,7 @@ export interface paths {
          * Step 2: match the account number, postal code and date of birth on file
          * @description 422 IDENTITY_MISMATCH if no client record matches all three; 409 ALREADY_ENROLLED if that client already has online access.
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["VerifyIdentityRequest"];
-                };
-            };
-            responses: {
-                /** @description Step 2: match the account number, postal code and date of birth on file */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["VerifyIdentityResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Conflicts with the current state (e.g. the slot was just taken) */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description The details did not match our records */
-                422: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/registration/security-questions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Questions to choose from in step 3 */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "accept-language"?: components["schemas"]["Language"];
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Security questions */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["SecurityQuestionsResponse"];
-                    };
-                };
-            };
-        };
-        put?: never;
-        /** Step 3: answer two security questions */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["SecurityAnswersRequest"];
-                };
-            };
-            responses: {
-                /** @description Step 3: answer two security questions */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["StepSavedResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Conflicts with the current state (e.g. the slot was just taken) */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        post: operations["verifyIdentity"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2005,58 +140,45 @@ export interface paths {
         get?: never;
         put?: never;
         /** Step 5 (optional): add a trusted contact */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["TrustedContactRequest"];
-                };
-            };
-            responses: {
-                /** @description Step 5 (optional): add a trusted contact */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["StepSavedResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Conflicts with the current state (e.g. the slot was just taken) */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
+        post: operations["saveTrustedContact"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/registration/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
+        get?: never;
+        put?: never;
+        /**
+         * Step 1: choose a login (email and password)
+         * @description Starts online enrolment for an existing client. 409 EMAIL_TAKEN if the email already has online access.
+         */
+        post: operations["start"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/registration/security-questions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Questions to choose from in step 3 */
+        get: operations["securityQuestions"];
+        put?: never;
+        /** Step 3: answer two security questions */
+        post: operations["saveSecurityAnswers"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2076,214 +198,168 @@ export interface paths {
          * Final step: choose the code method, accept the terms and create the login
          * @description Creates the user and returns a signed-in session (mfaRequired is false: the client just proved their identity).
          */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["RegistrationCompleteRequest"];
-                };
-            };
-            responses: {
-                /** @description Final step: choose the code method, accept the terms and create the login */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TokenResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Conflicts with the current state (e.g. the slot was just taken) */
-                409: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        post: operations["complete"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/api/wealth/dashboard": {
+    "/api/notifications/{id}/read": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Portfolio summary, allocation, goals, alerts and quick links */
-        get: {
-            parameters: {
-                query?: never;
-                header?: {
-                    "accept-language"?: components["schemas"]["Language"];
-                };
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Dashboard */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["DashboardResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        get?: never;
         put?: never;
-        post?: never;
+        /** Mark one notification as read */
+        post: operations["markRead"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/api/wealth/accounts": {
+    "/api/notifications/read-all": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** List visible accounts */
-        get: {
-            parameters: {
-                query?: {
-                    page?: number;
-                    pageSize?: number;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Accounts */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AccountsListResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        get?: never;
         put?: never;
-        /** Open a new, empty account */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["AccountOpenRequest"];
-                };
-            };
-            responses: {
-                /** @description Opened account */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AccountSummary"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
+        /** Mark every notification as read */
+        post: operations["markAllRead"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/education/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
+        get?: never;
+        put?: never;
+        /** Save progress on a class or challenge */
+        post: operations["saveProgress"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/token": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sign in with email and password
+         * @description Returns a session that still requires MFA (`mfaRequired: true`). Call `/api/auth/mfa/verify` next.
+         */
+        post: operations["token"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/refresh": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Exchange a refresh token for a new session */
+        post: operations["refresh"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/mfa/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Complete MFA for the current session
+         * @description Send the access token from `/api/auth/token` as a Bearer token. The demo code is `123456`.
+         */
+        post: operations["verifyMfa"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Revoke the current session */
+        post: operations["logout"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/advisor/messages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Secure message thread with the advisor, oldest first */
+        get: operations["messages"];
+        put?: never;
+        /** Send a message to the advisor */
+        post: operations["sendMessage"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/advisor/appointments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The user's meetings (past and upcoming), oldest first */
+        get: operations["appointments"];
+        put?: never;
+        /** Book a meeting in an open slot */
+        post: operations["book"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2298,236 +374,42 @@ export interface paths {
             cookie?: never;
         };
         /** Account detail with holdings */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Account detail */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AccountDetail"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        get: operations["detail"];
         put?: never;
         post?: never;
         delete?: never;
         options?: never;
         head?: never;
         /** Update an account nickname or visibility */
-        patch: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["AccountPatchRequest"];
-                };
-            };
-            responses: {
-                /** @description Updated account */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["AccountDetail"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        patch: operations["update"];
         trace?: never;
     };
-    "/api/wealth/accounts/{id}/transactions": {
+    "/api/advisor/appointments/{id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Posted transactions (paged) plus upcoming scheduled transactions */
-        get: {
-            parameters: {
-                query?: {
-                    page?: number;
-                    pageSize?: number;
-                    type?: components["schemas"]["TransactionType"];
-                };
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Transactions */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["TransactionsResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        get?: never;
         put?: never;
         post?: never;
         delete?: never;
         options?: never;
         head?: never;
-        patch?: never;
+        /** Reschedule (new date and time) or cancel a scheduled meeting */
+        patch: operations["update_1"];
         trace?: never;
     };
-    "/api/wealth/accounts/{id}/performance": {
+    "/health": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Account performance series with benchmark */
-        get: {
-            parameters: {
-                query?: {
-                    range?: components["schemas"]["PerformanceRange"];
-                };
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Performance */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["PerformanceResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        /** Liveness check */
+        get: operations["health"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2544,49 +426,7 @@ export interface paths {
             cookie?: never;
         };
         /** List documents (tax slips, statements, confirmations, legal) */
-        get: {
-            parameters: {
-                query?: {
-                    page?: number;
-                    pageSize?: number;
-                    year?: number | null;
-                    category?: string;
-                };
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Documents */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["DocumentsListResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        get: operations["list_2"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2603,46 +443,7 @@ export interface paths {
             cookie?: never;
         };
         /** Document download stub */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Document */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["DocumentDetailResponse"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        get: operations["detail_1"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2651,104 +452,270 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/wealth/documents/{id}/share": {
+    "/api/wealth/dashboard": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** Portfolio summary, allocation, goals, alerts and quick links */
+        get: operations["dashboard"];
         put?: never;
-        /** Share a document by email with a link that expires in 7 days */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    id: string;
-                };
-                cookie?: never;
-            };
-            /** @description JSON body */
-            requestBody?: {
-                content: {
-                    "application/json": components["schemas"]["DocumentShareRequest"];
-                };
-            };
-            responses: {
-                /** @description Share created */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["DocumentShareResponse"];
-                    };
-                };
-                /** @description Validation error */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Missing, expired or not MFA-verified access token */
-                401: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-                /** @description Resource not found */
-                404: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["ErrorEnvelope"];
-                    };
-                };
-            };
-        };
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/health": {
+    "/api/wealth/accounts/{id}/transactions": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** Liveness check */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path?: never;
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description Service is up */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": components["schemas"]["HealthResponse"];
-                    };
-                };
-            };
+        /** Posted transactions (paged) plus upcoming scheduled transactions */
+        get: operations["transactions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/wealth/accounts/{id}/performance": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
+        /** Account performance series with benchmark */
+        get: operations["performance"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/profile": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Signed-in user profile */
+        get: operations["profile"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/notifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** All notifications, newest first */
+        get: operations["list_3"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/watchlist": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Quotes for the user's watchlist, in the order added */
+        get: operations["watchlist"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/securities/{symbol}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One security with its quote and description */
+        get: operations["security"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Find securities by symbol or name */
+        get: operations["search"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/roundup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** This week's market roundup */
+        get: operations["roundup"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/quote": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Quotes, with held and watched flags for the user */
+        get: operations["quotes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/news": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Market headlines, newest first */
+        get: operations["news"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Closing prices over a range */
+        get: operations["history"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/market/baskets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Thematic baskets */
+        get: operations["baskets"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/education/glossary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Financial glossary, A to Z, optionally filtered */
+        get: operations["glossary"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/education/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learning centre catalogue with the user’s progress */
+        get: operations["content"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/advisor/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Open meeting slots with the user's advisor over the next five business days */
+        get: operations["availability"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2761,96 +728,281 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        AvailabilityResponse: {
-            advisor: components["schemas"]["AdvisorInfo"];
-            meetingTypes: components["schemas"]["MeetingType"][];
-            /** @description The next five business days, starting tomorrow */
-            days: components["schemas"]["AvailabilityDay"][];
+        AddressInput: {
+            line1: string;
+            line2?: string;
+            city: string;
+            province: components["schemas"]["Province"];
+            /** @example M5V 2A1 */
+            postalCode: string;
+            /** @enum {string} */
+            country: "Canada";
         };
-        AdvisorInfo: {
-            id: string;
+        ProfileAddressUpdate: {
+            address: components["schemas"]["AddressInput"];
+        };
+        /** @enum {string} */
+        Province: "AB" | "BC" | "MB" | "NB" | "NL" | "NS" | "NT" | "NU" | "ON" | "PE" | "QC" | "SK" | "YT";
+        Address: {
+            line1: string;
+            line2?: string;
+            city: string;
+            province: string;
+            postalCode: string;
+            country: string;
+        };
+        ProfileResponse: {
             name: string;
-            designation?: string;
-            available: boolean;
+            email: string;
+            phoneMasked: string;
+            dateOfBirth: string;
+            sinMasked?: string;
+            /** Format: int32 */
+            memberSince: number;
+            address: components["schemas"]["Address"];
+            trustedContact?: components["schemas"]["TrustedContact"];
         };
+        TrustedContact: {
+            name: string;
+            relationship: string;
+        };
+        /** @enum {string} */
+        DocumentDelivery: "digital" | "paper_and_digital";
+        /** @enum {string} */
+        Language: "en-CA" | "fr-CA";
         /** @enum {string} */
         MeetingType: "video" | "phone" | "in_person";
-        AvailabilityDay: {
-            /**
-             * Format: date
-             * @example 2027-06-30
-             */
-            date: string;
-            /** @description Open start times, Toronto time */
-            slots: string[];
+        NotificationPrefsUpdate: {
+            email?: boolean;
+            sms?: boolean;
+            push?: boolean;
         };
-        ErrorEnvelope: {
-            error: {
-                /** @example NOT_FOUND */
-                code: string;
-                message: string;
-                traceId: string;
-            };
-        };
-        AppointmentsResponse: components["schemas"]["Appointment"][];
-        Appointment: {
-            id: string;
-            advisorId: string;
-            meetingType: components["schemas"]["MeetingType"];
-            /**
-             * Format: date
-             * @example 2027-06-30
-             */
-            date: string;
-            /** @example 14:30 */
-            time: string;
-            status: components["schemas"]["AppointmentStatus"];
-            notes?: string;
+        PreferencesUpdate: {
+            notifications?: components["schemas"]["NotificationPrefsUpdate"];
+            documentDelivery?: components["schemas"]["DocumentDelivery"];
+            language?: components["schemas"]["Language"];
+            theme?: components["schemas"]["Theme"];
+            defaultMeetingType?: components["schemas"]["MeetingType"];
         };
         /** @enum {string} */
-        AppointmentStatus: "scheduled" | "completed" | "cancelled";
-        AppointmentCreateRequest: {
-            meetingType: components["schemas"]["MeetingType"];
-            /**
-             * Format: date
-             * @example 2027-06-30
-             */
-            date: string;
-            /** @example 14:30 */
-            time: string;
-            notes?: string;
+        Theme: "light" | "dark" | "system";
+        NotificationPrefs: {
+            email: boolean;
+            sms: boolean;
+            push: boolean;
         };
-        AppointmentPatchRequest: {
+        PreferencesResponse: {
+            notifications: components["schemas"]["NotificationPrefs"];
+            documentDelivery: components["schemas"]["DocumentDelivery"];
+            language: components["schemas"]["Language"];
+            theme: components["schemas"]["Theme"];
+            defaultMeetingType: components["schemas"]["MeetingType"];
+        };
+        Quote: {
+            symbol: string;
+            name: string;
+            exchange: string;
             /**
-             * Format: date
-             * @example 2027-06-30
+             * Format: int64
+             * @description Last price, minor units of currency
              */
-            date?: string;
-            /** @example 14:30 */
-            time?: string;
+            price: number;
+            currency: string;
+            /**
+             * Format: int64
+             * @description Change since previous close, minor units
+             */
+            change: number;
+            /** Format: double */
+            changePct: number;
+            /** @description The signed-in user holds this security in a visible account */
+            held: boolean;
+            /** @description On the signed-in user's watchlist */
+            watched: boolean;
+        };
+        /** @enum {string} */
+        GoalCategory: "Education" | "Vacation" | "Home" | "Retirement" | "Safety";
+        GoalCreateRequest: {
+            name: string;
+            category: components["schemas"]["GoalCategory"];
+            /** Format: int64 */
+            targetAmount: number;
+            /**
+             * Format: int64
+             * @description Defaults to 0
+             */
+            currentAmount?: number;
             /** @enum {string} */
-            status?: "cancelled";
+            currency: "CAD";
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            targetDate: string;
         };
-        AdvisorMessagesResponse: components["schemas"]["AdvisorMessage"][];
-        AdvisorMessage: {
+        Goal: {
+            /** @example goal-1 */
             id: string;
-            /** @enum {string} */
-            from: "advisor" | "client";
-            text: string;
-            /** Format: date-time */
-            at: string;
+            name: string;
+            category: components["schemas"]["GoalCategory"];
+            /** Format: int64 */
+            currentAmount: number;
+            /** Format: int64 */
+            targetAmount: number;
+            currency: string;
+            /** @example 2027-06-30 */
+            targetDate: string;
+            /**
+             * Format: double
+             * @description currentAmount / targetAmount, as a percentage (0-100)
+             */
+            progressPct: number;
         };
-        AdvisorMessageCreateRequest: {
-            text: string;
+        DocumentShareRequest: {
+            /**
+             * Format: email
+             * @example accountant@example.com
+             */
+            recipient: string;
+        };
+        DocumentShareResponse: {
+            recipient: string;
+            /** @description The shared link stops working after this time (7 days) */
+            expiresAt: string;
+        };
+        AccountOpenRequest: {
+            type: components["schemas"]["OpenableAccountType"];
+            /** @example Travel TFSA */
+            displayName: string;
+            nickname?: string;
+        };
+        /** @enum {string} */
+        OpenableAccountType: "TFSA" | "RRSP" | "FHSA" | "NON_REGISTERED";
+        AccountSummary: {
+            /** @example tfsa */
+            id: string;
+            type: components["schemas"]["AccountType"];
+            /** @example Growth TFSA */
+            displayName: string;
+            nickname: string | null;
+            /**
+             * Format: int64
+             * @description Amount in minor units (cents)
+             */
+            balance: number;
+            /**
+             * @description ISO-4217 currency code
+             * @example CAD
+             */
+            currency: string;
+            hidden: boolean;
+            /** Format: int64 */
+            dayChange?: number;
+            /** Format: double */
+            dayChangePct?: number;
+            /** Format: int64 */
+            contributionRoom?: number | null;
+            /** @example Tax-free */
+            taxStatus: string;
+            /** Format: double */
+            rateOfReturn?: number;
+        };
+        /** @enum {string} */
+        AccountType: "TFSA" | "RRSP" | "RESP" | "RDSP" | "FHSA" | "NON_REGISTERED" | "LIRA" | "RRIF";
+        VerifyIdentityRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            accountNumber: string;
+            postalCode: string;
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            dateOfBirth: string;
+        };
+        VerifyIdentityResponse: {
+            verified: boolean;
+            /** @description The client name on file, to confirm the right record was found */
+            name: string;
+        };
+        TrustedContactRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            name: string;
+            relationship: string;
+            phone?: string;
+            /** Format: email */
+            email?: string;
+        };
+        StepSavedResponse: {
+            saved: boolean;
+        };
+        RegistrationStartRequest: {
+            /** Format: email */
+            email: string;
+            password: string;
+        };
+        RegistrationStartResponse: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            /** @description Finish every step before this time (30 minutes) */
+            expiresAt: string;
+        };
+        SecurityAnswer: {
+            questionId: string;
+            answer: string;
+        };
+        SecurityAnswersRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            answers: components["schemas"]["SecurityAnswer"][];
+        };
+        Consents: {
+            terms: boolean;
+            privacy: boolean;
+            electronicDelivery: boolean;
+        };
+        /** @enum {string} */
+        MfaMethod: "sms" | "email";
+        RegistrationCompleteRequest: {
+            /** @example reg-1a2b3c4d */
+            registrationId: string;
+            /** @description Where one-time sign-in codes are sent */
+            mfaMethod: components["schemas"]["MfaMethod"];
+            consents: components["schemas"]["Consents"];
         };
         TokenResponse: {
             accessToken: string;
             refreshToken: string;
             /** @enum {string} */
             tokenType: "Bearer";
-            /** @enum {number} */
-            expiresIn: 900;
+            /**
+             * Format: int32
+             * @enum {integer}
+             */
+            expiresIn: "900";
             mfaRequired: boolean;
+        };
+        NotificationReadResponse: {
+            id: string;
+            read: boolean;
+        };
+        NotificationsReadAllResponse: {
+            /**
+             * Format: int32
+             * @description How many notifications were unread
+             */
+            updated: number;
+        };
+        EducationProgressRequest: {
+            contentId: string;
+            /** Format: int32 */
+            progressPct: number;
+        };
+        EducationProgressResponse: {
+            contentId: string;
+            /** Format: int32 */
+            progressPct: number;
         };
         TokenRequest: {
             /** @enum {string} */
@@ -2863,10 +1015,19 @@ export interface components {
             /** @example Demo123! */
             password: string;
         };
-        MfaVerifyResponse: {
+        RefreshRequest: {
+            refreshToken: string;
+        };
+        RefreshResponse: {
             accessToken: string;
-            /** @enum {number} */
-            expiresIn: 900;
+            refreshToken: string;
+            /** @enum {string} */
+            tokenType: "Bearer";
+            /**
+             * Format: int32
+             * @enum {integer}
+             */
+            expiresIn: "900";
         };
         MfaVerifyRequest: {
             /** @description Opaque challenge id (the demo accepts any value) */
@@ -2875,343 +1036,162 @@ export interface components {
             code: string;
             method: components["schemas"]["MfaMethod"];
         };
-        /** @enum {string} */
-        MfaMethod: "sms" | "email";
-        RefreshResponse: {
+        MfaVerifyResponse: {
             accessToken: string;
-            refreshToken: string;
-            /** @enum {string} */
-            tokenType: "Bearer";
-            /** @enum {number} */
-            expiresIn: 900;
-        };
-        RefreshRequest: {
-            refreshToken: string;
+            /**
+             * Format: int32
+             * @enum {integer}
+             */
+            expiresIn: "900";
         };
         LogoutRequest: {
             refreshToken?: string;
         };
-        EducationContentResponse: components["schemas"]["EducationContent"][];
-        EducationContent: {
-            /** @example e1 */
+        AdvisorMessageCreateRequest: {
+            text: string;
+        };
+        AdvisorMessage: {
             id: string;
-            /** @description In the language from Accept-Language */
-            title: string;
-            level: components["schemas"]["EducationLevel"];
-            type: components["schemas"]["EducationType"];
-            durationMin: number;
-            progressPct: number;
+            /** @enum {string} */
+            from: "advisor" | "client";
+            text: string;
+            at: string;
+        };
+        AppointmentCreateRequest: {
+            meetingType: components["schemas"]["MeetingType"];
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            date: string;
+            /** @example 14:30 */
+            time: string;
+            notes?: string;
+        };
+        Appointment: {
+            id: string;
+            advisorId: string;
+            meetingType: components["schemas"]["MeetingType"];
+            date: string;
+            /** @example 14:30 */
+            time: string;
+            status: components["schemas"]["AppointmentStatus"];
+            notes?: string;
         };
         /** @enum {string} */
-        EducationLevel: "beginner" | "intermediate" | "advanced";
-        /** @enum {string} */
-        EducationType: "class" | "challenge";
-        /** @enum {string} */
-        Language: "en-CA" | "fr-CA";
-        GlossaryResponse: components["schemas"]["GlossaryEntry"][];
-        GlossaryEntry: {
-            term: string;
-            definition: string;
+        AppointmentStatus: "scheduled" | "completed" | "cancelled";
+        AccountPatchRequest: {
+            hidden?: boolean;
+            nickname?: string | null;
         };
-        EducationProgressResponse: {
-            contentId: string;
-            progressPct: number;
+        AccountDetail: {
+            id: string;
+            type: components["schemas"]["AccountType"];
+            displayName: string;
+            nickname: string | null;
+            /** Format: int64 */
+            balance: number;
+            currency: string;
+            hidden: boolean;
+            /** Format: int64 */
+            dayChange?: number;
+            /** Format: double */
+            dayChangePct?: number;
+            /** Format: int64 */
+            contributionRoom?: number | null;
+            taxStatus: string;
+            /** Format: double */
+            rateOfReturn?: number;
+            holdings: components["schemas"]["Holding"][];
         };
-        EducationProgressRequest: {
-            contentId: string;
-            progressPct: number;
+        Holding: {
+            /** @example XEQT.TO */
+            symbol: string;
+            name: string;
+            /** Format: double */
+            quantity: number;
+            /** Format: int64 */
+            marketValue: number;
+            currency: string;
+            /** Format: double */
+            weightPct: number;
+        };
+        AppointmentPatchRequest: {
+            /**
+             * Format: date
+             * @example 2027-06-30
+             */
+            date?: string;
+            /** @example 14:30 */
+            time?: string;
+            /** @enum {string} */
+            status?: "cancelled";
+        };
+        HealthResponse: {
+            /** @enum {string} */
+            status: "ok";
         };
         GoalsListResponse: {
             items: components["schemas"]["Goal"][];
+            /** Format: int32 */
             page: number;
+            /** Format: int32 */
             pageSize: number;
+            /** Format: int64 */
             total: number;
         };
-        Goal: {
-            /** @example goal-1 */
+        Document: {
+            /** @example d1 */
+            id: string;
+            /** @example 2024 T5 Tax Slip */
+            name: string;
+            /** @example Tax */
+            category: string;
+            /** Format: int32 */
+            year: number;
+            accountId: string | null;
+            accountLabel?: string;
+            /** Format: int64 */
+            sizeBytes: number;
+            actionRequired: boolean;
+            url: string;
+        };
+        DocumentsListResponse: {
+            items: components["schemas"]["Document"][];
+            /** Format: int32 */
+            page: number;
+            /** Format: int32 */
+            pageSize: number;
+            /** Format: int64 */
+            total: number;
+        };
+        DocumentDetailResponse: {
             id: string;
             name: string;
-            category: components["schemas"]["GoalCategory"];
-            /**
-             * @description Amount in minor units (cents)
-             * @example 3241000
-             */
-            currentAmount: number;
-            /**
-             * @description Amount in minor units (cents)
-             * @example 3241000
-             */
-            targetAmount: number;
-            currency: string;
-            /**
-             * Format: date
-             * @example 2027-06-30
-             */
-            targetDate: string;
-            /** @description currentAmount / targetAmount, as a percentage (0-100) */
+            url: string;
+            contentType: string;
+            base64Stub: string;
+        };
+        /** @enum {string} */
+        AlertType: "ACTION_REQUIRED" | "INFO" | "SUCCESS" | "WARNING";
+        AllocationItem: {
+            /** @example Equity */
+            assetClass: string;
+            /** Format: double */
+            pct: number;
+        };
+        DashboardAlert: {
+            id: string;
+            type: components["schemas"]["AlertType"];
+            title: string;
+            /** @example electricwealth://documents/d1 */
+            deepLink?: string;
+        };
+        DashboardGoalSummary: {
+            id: string;
+            name: string;
+            /** Format: double */
             progressPct: number;
-        };
-        /** @enum {string} */
-        GoalCategory: "Education" | "Vacation" | "Home" | "Retirement" | "Safety";
-        GoalCreateRequest: {
-            name: string;
-            category: components["schemas"]["GoalCategory"];
-            /**
-             * @description Amount in minor units (cents)
-             * @example 3241000
-             */
-            targetAmount: number;
-            /**
-             * @description Defaults to 0
-             * @example 3241000
-             */
-            currentAmount?: number;
-            /** @enum {string} */
-            currency: "CAD";
-            /**
-             * Format: date
-             * @example 2027-06-30
-             */
-            targetDate: string;
-        };
-        QuotesResponse: components["schemas"]["Quote"][];
-        Quote: {
-            symbol: string;
-            name: string;
-            exchange: string;
-            /** @description Last price, minor units of currency */
-            price: number;
-            /**
-             * @description ISO-4217 currency code
-             * @example CAD
-             */
-            currency: string;
-            /** @description Change since previous close, minor units */
-            change: number;
-            changePct: number;
-            /** @description The signed-in user holds this security in a visible account */
-            held: boolean;
-            /** @description On the signed-in user's watchlist */
-            watched: boolean;
-        };
-        SecurityDetail: components["schemas"]["Quote"] & {
-            about?: string;
-        };
-        HistoryResponse: {
-            symbol: string;
-            range: components["schemas"]["HistoryRange"];
-            /**
-             * @description ISO-4217 currency code
-             * @example CAD
-             */
-            currency: string;
-            series: {
-                /** @description HH:MM for 1D, YYYY-MM-DD for 1M, YYYY-MM for 1Y and 5Y */
-                t: string;
-                /** @description Close, minor units */
-                c: number;
-            }[];
-        };
-        /** @enum {string} */
-        HistoryRange: "1D" | "1M" | "1Y" | "5Y";
-        SearchResponse: {
-            items: {
-                symbol: string;
-                name: string;
-                exchange: string;
-                /**
-                 * @description ISO-4217 currency code
-                 * @example CAD
-                 */
-                currency: string;
-            }[];
-        };
-        NewsResponse: {
-            id: string;
-            title: string;
-            source: string;
-            /** Format: date-time */
-            publishedAt: string;
-            tag?: string;
-        }[];
-        RoundupResponse: {
-            weekOf: string;
-            items: {
-                id: string;
-                title: string;
-                summary: string;
-                /** Format: date-time */
-                publishedAt: string;
-            }[];
-        };
-        BasketsResponse: {
-            id: string;
-            name: string;
-            description: string;
-            return1YPct: number;
-            holdings: number;
-            /** @enum {string} */
-            risk: "Low" | "Medium" | "High";
-        }[];
-        NotificationsResponse: components["schemas"]["Notification"][];
-        Notification: {
-            /** @example no1 */
-            id: string;
-            title: string;
-            body: string;
-            type: components["schemas"]["NotificationType"];
-            /** Format: date-time */
-            createdAt: string;
-            read: boolean;
-        };
-        /** @enum {string} */
-        NotificationType: "ACTION_REQUIRED" | "INFO" | "SUCCESS" | "WARNING";
-        NotificationReadResponse: {
-            id: string;
-            /** @enum {boolean} */
-            read: true;
-        };
-        NotificationsReadAllResponse: {
-            /** @description How many notifications were unread */
-            updated: number;
-        };
-        ProfileResponse: {
-            name: string;
-            /** Format: email */
-            email: string;
-            phoneMasked: string;
-            dateOfBirth: string;
-            sinMasked?: string;
-            memberSince: number;
-            address: components["schemas"]["Address"];
-            trustedContact?: components["schemas"]["TrustedContact"];
-        };
-        Address: {
-            line1: string;
-            line2?: string;
-            city: string;
-            province: string;
-            postalCode: string;
-            country: string;
-        };
-        TrustedContact: {
-            name: string;
-            relationship: string;
-        };
-        ProfileAddressUpdate: {
-            address: {
-                line1: string;
-                line2?: string;
-                city: string;
-                province: components["schemas"]["Province"];
-                /** @example M5V 2A1 */
-                postalCode: string;
-                /** @enum {string} */
-                country: "Canada";
-            };
-        };
-        /** @enum {string} */
-        Province: "AB" | "BC" | "MB" | "NB" | "NL" | "NS" | "NT" | "NU" | "ON" | "PE" | "QC" | "SK" | "YT";
-        PreferencesResponse: {
-            notifications: components["schemas"]["NotificationPrefs"];
-            documentDelivery: components["schemas"]["DocumentDelivery"];
-            language: components["schemas"]["Language"];
-            theme: components["schemas"]["Theme"];
-            defaultMeetingType: components["schemas"]["MeetingType"];
-        };
-        NotificationPrefs: {
-            email: boolean;
-            sms: boolean;
-            push: boolean;
-        };
-        /** @enum {string} */
-        DocumentDelivery: "digital" | "paper_and_digital";
-        /** @enum {string} */
-        Theme: "light" | "dark" | "system";
-        PreferencesUpdate: {
-            notifications?: {
-                email?: boolean;
-                sms?: boolean;
-                push?: boolean;
-            };
-            documentDelivery?: components["schemas"]["DocumentDelivery"];
-            language?: components["schemas"]["Language"];
-            theme?: components["schemas"]["Theme"];
-            defaultMeetingType?: components["schemas"]["MeetingType"];
-        };
-        RegistrationStartResponse: {
-            /** @example reg-1a2b3c4d */
-            registrationId: string;
-            /**
-             * Format: date-time
-             * @description Finish every step before this time (30 minutes)
-             */
-            expiresAt: string;
-        };
-        RegistrationStartRequest: {
-            /** Format: email */
-            email: string;
-            password: string;
-        };
-        VerifyIdentityResponse: {
-            /** @enum {boolean} */
-            verified: true;
-            /** @description The client name on file, to confirm the right record was found */
-            name: string;
-        };
-        VerifyIdentityRequest: {
-            /** @example reg-1a2b3c4d */
-            registrationId: string;
-            accountNumber: string;
-            postalCode: string;
-            /**
-             * Format: date
-             * @example 2027-06-30
-             */
-            dateOfBirth: string;
-        };
-        SecurityQuestionsResponse: components["schemas"]["SecurityQuestion"][];
-        SecurityQuestion: {
-            id: string;
-            text: string;
-        };
-        StepSavedResponse: {
-            /** @enum {boolean} */
-            saved: true;
-        };
-        SecurityAnswersRequest: {
-            /** @example reg-1a2b3c4d */
-            registrationId: string;
-            answers: {
-                questionId: string;
-                answer: string;
-            }[];
-        };
-        TrustedContactRequest: {
-            /** @example reg-1a2b3c4d */
-            registrationId: string;
-            name: string;
-            relationship: string;
-            phone?: string;
-            /** Format: email */
-            email?: string;
-        };
-        RegistrationCompleteRequest: {
-            /** @example reg-1a2b3c4d */
-            registrationId: string;
-            /**
-             * @description Where one-time sign-in codes are sent
-             * @enum {string}
-             */
-            mfaMethod: "sms" | "email";
-            consents: {
-                /** @enum {boolean} */
-                terms: true;
-                /** @enum {boolean} */
-                privacy: true;
-                /** @enum {boolean} */
-                electronicDelivery: true;
-            };
         };
         DashboardResponse: {
             portfolio: components["schemas"]["PortfolioSummary"];
@@ -3222,39 +1202,17 @@ export interface components {
         };
         PortfolioSummary: {
             /**
+             * Format: int64
              * @description Sum of visible account balances (minor units)
-             * @example 3241000
              */
             totalValue: number;
-            /**
-             * @description ISO-4217 currency code
-             * @example CAD
-             */
             currency: string;
+            /** Format: int64 */
             dayChange: number;
+            /** Format: double */
             dayChangePct: number;
-            /** Format: date-time */
             asOf: string;
         };
-        AllocationItem: {
-            /** @example Equity */
-            assetClass: string;
-            pct: number;
-        };
-        DashboardGoalSummary: {
-            id: string;
-            name: string;
-            progressPct: number;
-        };
-        DashboardAlert: {
-            id: string;
-            type: components["schemas"]["AlertType"];
-            title: string;
-            /** @example electricwealth://documents/d1 */
-            deepLink?: string;
-        };
-        /** @enum {string} */
-        AlertType: "ACTION_REQUIRED" | "INFO" | "SUCCESS" | "WARNING";
         QuickLink: {
             label: string;
             /** @example electricwealth://documents */
@@ -3262,166 +1220,188 @@ export interface components {
         };
         AccountsListResponse: {
             items: components["schemas"]["AccountSummary"][];
+            /** Format: int32 */
             page: number;
+            /** Format: int32 */
             pageSize: number;
+            /** Format: int64 */
             total: number;
         };
-        AccountSummary: {
-            /** @example tfsa */
-            id: string;
-            type: components["schemas"]["AccountType"];
-            /** @example Growth TFSA */
-            displayName: string;
-            nickname: string | null;
-            /**
-             * @description Amount in minor units (cents)
-             * @example 3241000
-             */
-            balance: number;
-            /**
-             * @description ISO-4217 currency code
-             * @example CAD
-             */
-            currency: string;
-            hidden: boolean;
-            dayChange?: number;
-            dayChangePct?: number;
-            contributionRoom?: number | null;
-            /** @example Tax-free */
-            taxStatus: string;
-            rateOfReturn?: number;
-        };
         /** @enum {string} */
-        AccountType: "TFSA" | "RRSP" | "RESP" | "RDSP" | "FHSA" | "NON_REGISTERED" | "LIRA" | "RRIF";
-        AccountOpenRequest: {
-            type: components["schemas"]["OpenableAccountType"];
-            /** @example Travel TFSA */
-            displayName: string;
-            nickname?: string;
-        };
-        /** @enum {string} */
-        OpenableAccountType: "TFSA" | "RRSP" | "FHSA" | "NON_REGISTERED";
-        AccountDetail: components["schemas"]["AccountSummary"] & {
-            holdings: components["schemas"]["Holding"][];
-        };
-        Holding: {
-            /** @example XEQT.TO */
-            symbol: string;
-            name: string;
-            quantity: number;
-            /**
-             * @description Amount in minor units (cents)
-             * @example 3241000
-             */
-            marketValue: number;
-            /**
-             * @description ISO-4217 currency code
-             * @example CAD
-             */
-            currency: string;
-            weightPct: number;
-        };
-        AccountPatchRequest: {
-            nickname?: string | null;
-            hidden?: boolean;
-        };
-        TransactionsResponse: {
-            items: components["schemas"]["Transaction"][];
-            page: number;
-            pageSize: number;
-            total: number;
-            scheduled: components["schemas"]["Transaction"][];
-        };
+        TransactionType: "contribution" | "buy" | "sell" | "dividend" | "fee" | "withdrawal" | "transfer" | "scheduled";
         Transaction: {
             id: string;
-            /** Format: date-time */
             date: string;
             description: string;
             detail?: string;
             type: components["schemas"]["TransactionType"];
-            /**
-             * @description Amount in minor units (cents)
-             * @example 3241000
-             */
+            /** Format: int64 */
             amount: number;
-            /**
-             * @description ISO-4217 currency code
-             * @example CAD
-             */
             currency: string;
         };
-        /** @enum {string} */
-        TransactionType: "contribution" | "buy" | "sell" | "dividend" | "fee" | "withdrawal" | "transfer" | "scheduled";
-        PerformanceResponse: {
-            range: components["schemas"]["PerformanceRange"];
-            timeWeightedReturnPct: number;
-            /**
-             * @description ISO-4217 currency code
-             * @example CAD
-             */
-            currency: string;
-            series: components["schemas"]["PerformancePoint"][];
-            benchmark: {
-                name: string;
-                series: components["schemas"]["PerformancePoint"][];
-            };
+        TransactionsResponse: {
+            items: components["schemas"]["Transaction"][];
+            /** Format: int32 */
+            page: number;
+            /** Format: int32 */
+            pageSize: number;
+            /** Format: int64 */
+            total: number;
+            scheduled: components["schemas"]["Transaction"][];
         };
         /** @enum {string} */
         PerformanceRange: "1M" | "1Y" | "ALL";
+        Benchmark: {
+            name: string;
+            series: components["schemas"]["PerformancePoint"][];
+        };
         PerformancePoint: {
             /**
              * @description Period, e.g. 2024-03
              * @example 2024-03
              */
             t: string;
+            /** Format: double */
             v: number;
         };
-        DocumentsListResponse: {
-            items: components["schemas"]["Document"][];
-            page: number;
-            pageSize: number;
-            total: number;
+        PerformanceResponse: {
+            range: components["schemas"]["PerformanceRange"];
+            /** Format: double */
+            timeWeightedReturnPct: number;
+            currency: string;
+            series: components["schemas"]["PerformancePoint"][];
+            benchmark: components["schemas"]["Benchmark"];
         };
-        Document: {
-            /** @example d1 */
+        SecurityQuestion: {
             id: string;
-            /** @example 2024 T5 Tax Slip */
-            name: string;
-            /** @example Tax */
-            category: string;
-            year: number;
-            accountId: string | null;
-            accountLabel?: string;
-            sizeBytes: number;
-            actionRequired: boolean;
-            url: string;
+            text: string;
         };
-        DocumentDetailResponse: {
+        Notification: {
+            /** @example no1 */
+            id: string;
+            title: string;
+            body: string;
+            type: components["schemas"]["NotificationType"];
+            createdAt: string;
+            read: boolean;
+        };
+        /** @enum {string} */
+        NotificationType: "ACTION_REQUIRED" | "INFO" | "SUCCESS" | "WARNING";
+        SecurityDetail: {
+            symbol: string;
+            name: string;
+            exchange: string;
+            /** Format: int64 */
+            price: number;
+            currency: string;
+            /** Format: int64 */
+            change: number;
+            /** Format: double */
+            changePct: number;
+            held: boolean;
+            watched: boolean;
+            about?: string;
+        };
+        SearchItem: {
+            symbol: string;
+            name: string;
+            exchange: string;
+            currency: string;
+        };
+        SearchResponse: {
+            items: components["schemas"]["SearchItem"][];
+        };
+        RoundupItem: {
+            id: string;
+            title: string;
+            summary: string;
+            publishedAt: string;
+        };
+        RoundupResponse: {
+            weekOf: string;
+            items: components["schemas"]["RoundupItem"][];
+        };
+        NewsItem: {
+            id: string;
+            title: string;
+            source: string;
+            publishedAt: string;
+            tag?: string;
+        };
+        /** @enum {string} */
+        HistoryRange: "1D" | "1M" | "1Y" | "5Y";
+        HistoryResponse: {
+            symbol: string;
+            range: components["schemas"]["HistoryRange"];
+            currency: string;
+            series: components["schemas"]["PricePoint"][];
+        };
+        PricePoint: {
+            /** @description HH:MM for 1D, YYYY-MM-DD for 1M, YYYY-MM for 1Y and 5Y */
+            t: string;
+            /**
+             * Format: int64
+             * @description Close, minor units
+             */
+            c: number;
+        };
+        Basket: {
             id: string;
             name: string;
-            url: string;
-            contentType: string;
-            base64Stub: string;
-        };
-        DocumentShareResponse: {
-            /** Format: email */
-            recipient: string;
-            /**
-             * Format: date-time
-             * @description The shared link stops working after this time (7 days)
-             */
-            expiresAt: string;
-        };
-        DocumentShareRequest: {
-            /**
-             * Format: email
-             * @example accountant@example.com
-             */
-            recipient: string;
-        };
-        HealthResponse: {
+            description: string;
+            /** Format: double */
+            return1YPct: number;
+            /** Format: int32 */
+            holdings: number;
             /** @enum {string} */
-            status: "ok";
+            risk: "Low" | "Medium" | "High";
+        };
+        GlossaryEntry: {
+            term: string;
+            definition: string;
+        };
+        /** @enum {string} */
+        EducationLevel: "beginner" | "intermediate" | "advanced";
+        /** @enum {string} */
+        EducationType: "class" | "challenge";
+        EducationContent: {
+            /** @example e1 */
+            id: string;
+            /** @description In the language from Accept-Language */
+            title: string;
+            level: components["schemas"]["EducationLevel"];
+            type: components["schemas"]["EducationType"];
+            /** Format: int32 */
+            durationMin: number;
+            /** Format: int32 */
+            progressPct: number;
+        };
+        AdvisorInfo: {
+            id: string;
+            name: string;
+            designation?: string;
+            available: boolean;
+        };
+        AvailabilityDay: {
+            /** @example 2027-06-30 */
+            date: string;
+            /** @description Open start times, Toronto time */
+            slots: string[];
+        };
+        AvailabilityResponse: {
+            advisor: components["schemas"]["AdvisorInfo"];
+            meetingTypes: components["schemas"]["MeetingType"][];
+            /** @description The next five business days, starting tomorrow */
+            days: components["schemas"]["AvailabilityDay"][];
+        };
+        Detail: {
+            /** @example NOT_FOUND */
+            code: string;
+            message: string;
+            traceId: string;
+        };
+        ErrorEnvelope: {
+            error: components["schemas"]["Detail"];
         };
     };
     responses: never;
@@ -3431,4 +1411,2082 @@ export interface components {
     pathItems: never;
 }
 export type $defs = Record<string, never>;
-export type operations = Record<string, never>;
+export interface operations {
+    updateAddress: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProfileAddressUpdate"];
+            };
+        };
+        responses: {
+            /** @description Updated profile */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    preferences: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Preferences */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreferencesResponse"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    updatePreferences: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PreferencesUpdate"];
+            };
+        };
+        responses: {
+            /** @description Updated preferences */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreferencesResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    addToWatchlist: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example XEQT.TO */
+                symbol: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The updated watchlist */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Quote"][];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    removeFromWatchlist: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example XEQT.TO */
+                symbol: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The updated watchlist */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Quote"][];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    list: {
+        parameters: {
+            query?: {
+                page?: number;
+                pageSize?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Goals */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GoalsListResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GoalCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description Created goal */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Goal"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    share: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example d1 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DocumentShareRequest"];
+            };
+        };
+        responses: {
+            /** @description Share created */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentShareResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    list_1: {
+        parameters: {
+            query?: {
+                page?: number;
+                pageSize?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Accounts */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountsListResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    open: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AccountOpenRequest"];
+            };
+        };
+        responses: {
+            /** @description Opened account */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountSummary"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    verifyIdentity: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VerifyIdentityRequest"];
+            };
+        };
+        responses: {
+            /** @description Step 2: match the account number, postal code and date of birth on file */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VerifyIdentityResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflicts with the current state (e.g. the slot was just taken) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description The details did not match our records */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    saveTrustedContact: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TrustedContactRequest"];
+            };
+        };
+        responses: {
+            /** @description Step 5 (optional): add a trusted contact */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StepSavedResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflicts with the current state (e.g. the slot was just taken) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    start: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegistrationStartRequest"];
+            };
+        };
+        responses: {
+            /** @description Step 1: choose a login (email and password) */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegistrationStartResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflicts with the current state (e.g. the slot was just taken) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    securityQuestions: {
+        parameters: {
+            query?: never;
+            header?: {
+                "accept-language"?: components["schemas"]["Language"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Security questions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SecurityQuestion"][];
+                };
+            };
+        };
+    };
+    saveSecurityAnswers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SecurityAnswersRequest"];
+            };
+        };
+        responses: {
+            /** @description Step 3: answer two security questions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StepSavedResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflicts with the current state (e.g. the slot was just taken) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    complete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegistrationCompleteRequest"];
+            };
+        };
+        responses: {
+            /** @description Final step: choose the code method, accept the terms and create the login */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TokenResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflicts with the current state (e.g. the slot was just taken) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    markRead: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example no1 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Marked as read */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotificationReadResponse"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    markAllRead: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Marked as read */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotificationsReadAllResponse"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    saveProgress: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EducationProgressRequest"];
+            };
+        };
+        responses: {
+            /** @description Saved progress */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EducationProgressResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    token: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TokenRequest"];
+            };
+        };
+        responses: {
+            /** @description Session created; MFA required */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TokenResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    refresh: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RefreshRequest"];
+            };
+        };
+        responses: {
+            /** @description New tokens */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RefreshResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    verifyMfa: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MfaVerifyRequest"];
+            };
+        };
+        responses: {
+            /** @description Session is now MFA-verified */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MfaVerifyResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    logout: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["LogoutRequest"];
+            };
+        };
+        responses: {
+            /** @description Signed out */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    messages: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Messages */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdvisorMessage"][];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    sendMessage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AdvisorMessageCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description Sent message */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdvisorMessage"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    appointments: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Appointments */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Appointment"][];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    book: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AppointmentCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description Booked */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Appointment"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflicts with the current state (e.g. the slot was just taken) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    detail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example tfsa */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Account detail */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountDetail"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example tfsa */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AccountPatchRequest"];
+            };
+        };
+        responses: {
+            /** @description Updated account */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountDetail"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    update_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AppointmentPatchRequest"];
+            };
+        };
+        responses: {
+            /** @description Updated appointment */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Appointment"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Conflicts with the current state (e.g. the slot was just taken) */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    health: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Service is up */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HealthResponse"];
+                };
+            };
+        };
+    };
+    list_2: {
+        parameters: {
+            query?: {
+                page?: number;
+                pageSize?: number;
+                year?: number;
+                category?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Documents */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentsListResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    detail_1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example d1 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Document */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DocumentDetailResponse"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    dashboard: {
+        parameters: {
+            query?: never;
+            header?: {
+                "accept-language"?: components["schemas"]["Language"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Dashboard */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DashboardResponse"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    transactions: {
+        parameters: {
+            query?: {
+                page?: number;
+                pageSize?: number;
+                type?: components["schemas"]["TransactionType"];
+            };
+            header?: never;
+            path: {
+                /** @example tfsa */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Transactions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TransactionsResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    performance: {
+        parameters: {
+            query?: {
+                range?: components["schemas"]["PerformanceRange"];
+            };
+            header?: never;
+            path: {
+                /** @example tfsa */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Performance */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PerformanceResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    profile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Profile */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileResponse"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    list_3: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Notifications */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Notification"][];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    watchlist: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Quotes for the user's watchlist, in the order added */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Quote"][];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    security: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example XEQT.TO */
+                symbol: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description One security with its quote and description */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SecurityDetail"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    search: {
+        parameters: {
+            query?: {
+                q?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Find securities by symbol or name */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    roundup: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description This week's market roundup */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoundupResponse"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    quotes: {
+        parameters: {
+            query?: {
+                /**
+                 * @description Comma-separated symbols. Omit for every listed security.
+                 * @example XEQT.TO,AAPL
+                 */
+                symbols?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Quotes, with held and watched flags for the user */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Quote"][];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    news: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Market headlines, newest first */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NewsItem"][];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    history: {
+        parameters: {
+            query: {
+                /** @example XEQT.TO */
+                symbol: string;
+                range?: components["schemas"]["HistoryRange"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Closing prices over a range */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HistoryResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    baskets: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Thematic baskets */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Basket"][];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    glossary: {
+        parameters: {
+            query?: {
+                /** @description Matches the term or definition, case-insensitive */
+                q?: string;
+            };
+            header?: {
+                "accept-language"?: components["schemas"]["Language"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Glossary entries */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GlossaryEntry"][];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    content: {
+        parameters: {
+            query?: {
+                level?: components["schemas"]["EducationLevel"];
+                type?: components["schemas"]["EducationType"];
+            };
+            header?: {
+                "accept-language"?: components["schemas"]["Language"];
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Classes and challenges */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EducationContent"][];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+    availability: {
+        parameters: {
+            query?: {
+                /** @description Accepted for v1 compatibility; every type has the same slots */
+                meetingType?: components["schemas"]["MeetingType"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Availability */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AvailabilityResponse"];
+                };
+            };
+            /** @description Validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Missing, expired or not MFA-verified access token */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorEnvelope"];
+                };
+            };
+        };
+    };
+}

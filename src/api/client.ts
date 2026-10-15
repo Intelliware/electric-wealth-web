@@ -1,4 +1,4 @@
-// Typed API client. `paths` and `components` are generated from electric-wealth-api's openapi.json
+// Typed API client. `paths` and `components` are generated from electric-wealth-api-spring's openapi.json
 // by `npm run gen:api`, so every URL, parameter and response below is checked by TypeScript.
 import createClient, { type Middleware } from 'openapi-fetch';
 import { tokenStore } from '../auth/tokenStore';

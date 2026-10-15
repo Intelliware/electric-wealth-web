@@ -3,9 +3,9 @@ import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  // The browser calls /api on the Vite dev server, which proxies to the API.
+  // The browser calls /api on the Vite dev server, which proxies to the Spring API.
   // That keeps everything same-origin, so there is no CORS setup in development.
-  const apiUrl = env.API_URL || 'http://localhost:4100';
+  const apiUrl = env.API_URL || 'http://localhost:4200';
 
   return {
     plugins: [react()],
