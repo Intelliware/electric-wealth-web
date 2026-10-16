@@ -18,7 +18,7 @@ files in `<KB>/source-docs/electric-wealth-web/web-app-consumer/` (B).
 
 | Item | Value |
 |---|---|
-| Repo path | `/Users/kosta/repos/em/ElectricWeatlhParent/electric-wealth-web` |
+| Repo path | `electric-wealth-web` |
 | Source commit | `bbb4907dd0d866223742c529ea65a75ec8af576f` (2026-10-15, "Configure web app for Spring API") |
 | Monorepo | No (single Vite app) |
 | Included | `src/**` (except `src/api/schema.d.ts`), `index.html`, `vite.config.ts`, `tsconfig*.json`, `package.json`, `.env.example`, `.nvmrc`, `.gitignore`, `public/favicon.svg`, `README.md` |
@@ -30,7 +30,7 @@ files in `<KB>/source-docs/electric-wealth-web/web-app-consumer/` (B).
 | Existing docs | `README.md` only |
 | Tests / CI | None in the repo (no test runner, no `.github/`); quality gate is `npm run verify` |
 | Size | 33 hand-written source files under `src/` (4,047 lines TS/TSX, 1,582 lines CSS, 2 × 502-line locale JSON) |
-| KB root | `/Users/kosta/repos/em/ElectricWeatlhParent/electric-wealth-knowledge-base` |
+| KB root | `electric-wealth-knowledge-base` |
 | Overall status | **Extraction complete. Close-out: automated, MECHANICAL: GO** (20 Tier M passed, 0 failed; 11 UNVERIFIED). See [verification-report.md](verification-report.md). |
 
 ## Decision gates (composition `include-if` flags)

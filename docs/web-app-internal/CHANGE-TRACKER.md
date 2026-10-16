@@ -30,7 +30,7 @@ against that source version.
 | B | Part B — `<KB>/source-docs/electric-wealth-web/web-app-consumer/` |
 | Both | A and B |
 
-KB root: `/Users/kosta/repos/em/ElectricWeatlhParent/electric-wealth-knowledge-base`.
+KB root: `electric-wealth-knowledge-base`.
 
 ### Change Types
 
